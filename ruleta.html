@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpinStats</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://i.imgur.com/EESckqO.png" type="image/png">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom, #1e1e2f, #0c0c12);
+            margin: 0;
+            padding: 0;
+            color: white;
+        }
+        .header p {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            font-size: 1.5em;
+            color: #28a745;
+        }
+
+        .header {
+            background-color: #111;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .header img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            margin-right: 15px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 15px;
+            margin-left: auto;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: #28a745;
+        }
+
+        .container {
+            margin: 50px auto;
+            padding: 30px;
+            background: #222;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #28a745;
+        }
+
+        label {
+            display: inline-block;
+            margin-right: 10px;
+            color: #ddd;
+            font-size: 1.1em;
+            vertical-align: middle;
+        }
+
+        input[type="number"],
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 15px;
+            border-radius: 8px;
+            border: 1px solid #444;
+            background: #333;
+            color: white;
+            font-size: 1em;
+        }
+
+        input[type="checkbox"] {
+            width: auto;
+            height: 20px;
+            margin-left: 10px;
+            vertical-align: middle;
+            display: inline-block;
+        }
+
+        input[type="checkbox"] + label {
+            position: relative;
+            padding-left: 30px;
+            cursor: pointer;
+            font-size: 1.1em;
+            color: #ddd;
+            vertical-align: middle;
+        }
+
+        input[type="checkbox"]:checked + label:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            background-color: #28a745;
+            border-radius: 5px;
+        }
+
+        input[type="checkbox"]:checked + label:after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            border-radius: 50%;
+        }
+
+        button {
+            background: linear-gradient(to right, #28a745, #218838);
+            color: white;
+            font-size: 1.1em;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 20px;
+            width: 100%;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background: linear-gradient(to right, #218838, #28a745);
+            transform: translateY(-2px);
+        }
+
+        .result {
+            margin-top: 20px;
+            background: #111;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: #fff;
+            animation: fadeIn 0.5s;
+        }
+
+        .result p {
+            margin: 10px 0;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .footer {
+            background: #111;
+            padding: 10px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 30px;
+            border-top: 2px solid #222;
+        }
+
+        .footer a {
+            color: #28a745;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .tooltip {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.2em;
+            color: #28a745;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+                /* Ajustes responsivos */
+                @media (max-width: 768px) {
+    .header {
+        display: flex;
+        flex-direction: column; /* Coloca los elementos en una columna */
+        align-items: center; /* Centra el contenido */
+        justify-content: flex-start;
+        padding: 20px 0;
+    }
+
+    .header img {
+        position: absolute;
+        top: 15px;
+        left: 20px;
+        width: 50px;
+        height: 50px;
+    }
+
+    .header p {
+        font-size: 1.5em;
+        color: #28a745;
+        margin: 0;
+        text-align: center;
+    }
+
+    .nav {
+        display: flex;
+        justify-content: center; /* Centra los enlaces de navegación */
+        gap: 10px;
+        margin-top: 15px; /* Espacio entre el título y los enlaces */
+        width: 100%;
+    }
+
+    .nav a {
+        font-size: 0.9em; /* Reducir el tamaño de las opciones */
+    }
+
+    .cards {
+        margin-top: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+
+    .card {
+        height: auto;
+        padding: 15px;
+    }
+
+    .card img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .footer {
+        font-size: 0.8em; /* Reducir el tamaño del texto del pie de página */
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="https://i.imgur.com/lrDksOx.png" alt="Logo SpinStats">
+        <p>SpinStats</p>
+        <nav class="nav">
+            <a href="index.html">Inicio</a>
+            <a href="ruleta.html">Ruleta</a>
+            <a href="blackjack.html">Blackjack</a>
+            <a href="poker.html">Poker</a>
+            <a href="slots.html">Slots</a>
+            <a href="adeportivas.html">A. Deportivas</a>
+        </nav>
+    </div>
+
+    <div class="container">
+        <h2>Ruleta</h2>
+
+        <!-- Selección del tipo de ruleta -->
+        <label for="tipoRuleta">Tipo de Ruleta:</label>
+        <select id="tipoRuleta">
+            <option value="1">Europea (37 casillas)</option>
+            <option value="2">Americana (38 casillas)</option>
+        </select>
+
+        <!-- Apostar a números específicos -->
+        <label>Apostar a números específicos:</label>
+        <input type="checkbox" id="apostarNumeros">
+        <div id="numerosOpciones" style="display:none;">
+            <label for="numerosElegidos">Elige los números (separados por comas):</label>
+            <input type="text" id="numerosElegidos" placeholder="Ejemplo: 5, 12, 18">
+        </div>
+        <br>
+
+        <!-- Apostar a color -->
+        <label>Apostar a color:</label>
+        <input type="checkbox" id="apostarColor">
+        <select id="colorApostado" style="display:none;">
+            <option value="rojo">Rojo</option>
+            <option value="negro">Negro</option>
+        </select>
+        <br>
+
+        <!-- Apostar a par/impar -->
+        <label>Apostar a par/impar:</label>
+        <input type="checkbox" id="apostarParImpar">
+        <br>
+
+        <!-- Apostar a fila -->
+        <label>Apostar a fila:</label>
+        <input type="checkbox" id="apostarFila">
+        <select id="filaApostada" style="display:none;">
+            <option value="1">Fila 1 (1-12)</option>
+            <option value="2">Fila 2 (13-24)</option>
+            <option value="3">Fila 3 (25-36)</option>
+        </select>
+        <br>
+
+        <!-- Apostar a docena -->
+        <label>Apostar a docena:</label>
+        <input type="checkbox" id="apostarDocena">
+        <select id="docenaApostada" style="display:none;">
+            <option value="1">Docena 1 (1-12)</option>
+            <option value="2">Docena 2 (13-24)</option>
+            <option value="3">Docena 3 (25-36)</option>
+        </select>
+        <br>
+        
+        <!-- Apostar a cantidad -->
+        <label for="cantidadApuesta">Cantidad a apostar (€):</label>
+        <input type="number" id="cantidadApuesta" min="0.01" step="0.01">
+        <br>
+
+        <button onclick="calcularProbabilidades()">Calcular Probabilidades y Ganancias</button>
+
+        <div class="result" id="resultado">
+            <!-- Resultados se mostrarán aquí -->
+        </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2025 <a href="#">Términos y Condiciones</a>
+    </div>
+
+<script>
+// Probabilidades y valores para la ruleta Europea
+const probabilidades = {
+    color: 18 / 37, // 18 números rojos o negros / 37 total
+    parImpar: 18 / 37, // 18 números pares o impares / 37 total
+    numero: 1 / 37, // Un número específico / 37 total
+};
+
+// Mostrar opciones de entrada cuando se seleccionan
+document.getElementById("apostarNumeros").addEventListener("change", function() {
+    document.getElementById("numerosOpciones").style.display = this.checked ? "block" : "none";
+});
+document.getElementById("apostarColor").addEventListener("change", function() {
+    document.getElementById("colorApostado").style.display = this.checked ? "block" : "none";
+});
+document.getElementById("apostarFila").addEventListener("change", function() {
+    document.getElementById("filaApostada").style.display = this.checked ? "block" : "none";
+});
+document.getElementById("apostarDocena").addEventListener("change", function() {
+    document.getElementById("docenaApostada").style.display = this.checked ? "block" : "none";
+});
+
+// Función para calcular las estadísticas
+function calcularProbabilidades() {
+    const cantidadApuesta = parseFloat(document.getElementById("cantidadApuesta").value);
+    const numerosElegidos = document.getElementById("numerosElegidos").value.split(',').map(n => parseInt(n.trim()));
+    const cantidadNumeros = numerosElegidos.length;
+
+    // Limpiar resultados anteriores
+    let resultadoHTML = "";
+
+    let probabilidadTotalPerder = 1; // Empezamos con la probabilidad de perder en todos los eventos.
+    let gananciaMaxima = 0;
+    let gananciaProbable = 0;
+
+    // Apuesta a números específicos
+    if (document.getElementById("apostarNumeros").checked && cantidadNumeros > 0) {
+        const probabilidadNumeros = (cantidadNumeros / 37);
+        const probabilidadPerderNumeros = 1 - probabilidadNumeros;
+        const gananciaNumeros = cantidadApuesta * 35; // Ganancia por ganar a un número
+        const esperanzaNumeros = (probabilidadNumeros * gananciaNumeros) - (probabilidadPerderNumeros * cantidadApuesta);
+
+        resultadoHTML += `
+            <p>Probabilidad de ganar a alguno de los números elegidos: ${(probabilidadNumeros * 100).toFixed(2)}%</p>
+            <p>Probabilidad de perder con esos números: ${(probabilidadPerderNumeros * 100).toFixed(2)}%</p>
+            <p>Esperanza matemática a esos números: €${esperanzaNumeros.toFixed(2)}</p>
+        `;
+        probabilidadTotalPerder *= probabilidadPerderNumeros;
+        gananciaMaxima = Math.max(gananciaMaxima, gananciaNumeros);
+        gananciaProbable += esperanzaNumeros;
+    }
+
+    // Apuesta a color
+    if (document.getElementById("apostarColor").checked) {
+        const probabilidadColor = probabilidades.color;
+        const probabilidadPerderColor = 1 - probabilidadColor;
+        resultadoHTML += `
+            <p>Probabilidad de ganar a color (rojo o negro): ${(probabilidadColor * 100).toFixed(2)}%</p>
+        `;
+        probabilidadTotalPerder *= probabilidadPerderColor;
+        gananciaMaxima = Math.max(gananciaMaxima, cantidadApuesta * 2);
+    }
+
+    // Apuesta a par/impar
+    if (document.getElementById("apostarParImpar").checked) {
+        const probabilidadParImpar = probabilidades.parImpar;
+        const probabilidadPerderParImpar = 1 - probabilidadParImpar;
+        resultadoHTML += `
+            <p>Probabilidad de ganar a par/impar: ${(probabilidadParImpar * 100).toFixed(2)}%</p>
+        `;
+        probabilidadTotalPerder *= probabilidadPerderParImpar;
+        gananciaMaxima = Math.max(gananciaMaxima, cantidadApuesta * 2);
+    }
+
+    // Calcular la probabilidad total
+    const probabilidadTotal = 1 - probabilidadTotalPerder;
+
+    // Mostrar los resultados
+    resultadoHTML += `
+        <p>Probabilidad total de ganar: ${(probabilidadTotal * 100).toFixed(2)}%</p>
+        <p>Ganancia máxima posible: €${gananciaMaxima.toFixed(2)}</p>
+        <p>Ganancia probable: €${gananciaProbable.toFixed(2)}</p>
+    `;
+
+    document.getElementById("resultado").innerHTML = resultadoHTML;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpinStats - Probabilidades de Póker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://i.imgur.com/EESckqO.png" type="image/png">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom, #1e1e2f, #0c0c12);
+            margin: 0;
+            padding: 0;
+            color: white;
+        }
+
+        .header p {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            font-size: 1.5em;
+            color: #28a745;
+        }
+
+        .header {
+            background-color: #111;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .header img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            margin-right: 15px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 15px;
+            margin-left: auto;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: #28a745;
+        }
+
+        .container {
+            margin: 50px auto;
+            padding: 30px;
+            background: #222;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            width: 60%;
+            max-width: 600px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between; /* Espaciado entre elementos */
+        }
+        
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #28a745;
+        }
+
+        label {
+            display: inline-block;
+            margin-right: 10px;
+            color: #ddd;
+            font-size: 1.1em;
+            vertical-align: middle;
+        }
+
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 15px;
+            border-radius: 8px;
+            border: 1px solid #444;
+            background: #333;
+            color: white;
+            font-size: 1em;
+        }
+
+        button {
+            background: linear-gradient(to right, #28a745, #218838);
+            color: white;
+            font-size: 1.1em;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 20px;
+            width: 100%;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background: linear-gradient(to right, #218838, #28a745);
+            transform: translateY(-2px);
+        }
+
+        .result {
+            margin-top: 20px;
+            background: #111;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: #fff;
+            animation: fadeIn 0.5s;
+        }
+
+        .result p {
+            margin: 10px 0;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .footer {
+            background: #111;
+            padding: 10px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 30px;
+            border-top: 2px solid #222;
+        }
+
+        .footer a {
+            color: #28a745;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Estilos para la tarjeta de la derecha */
+        .right-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            width: 200px;  /* Aumentamos el ancho */
+            height: 200px;  /* Añadimos una altura mayor */
+            text-align: left;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+            position: absolute;
+            top: 20%;  /* Alineamos un poco hacia abajo */
+            margin-left: 100px;
+        }
+
+        .card-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            list-style-type: none;  /* Quitamos las viñetas */
+        }
+
+        .card-img {
+            width: 40px;  /* Hacemos la imagen un poco más grande */
+            height: 40px;
+            object-fit: contain;
+            margin-right: 10px;
+        }
+
+        .card-text {
+            font-size: 1.1em;  /* Un tamaño más pequeño para que quepa mejor */
+            color: #fff;
+    }
+            /* Ajustes responsivos */
+/* Ajustes responsivos */
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+    .header {
+        display: flex;
+        flex-direction: column; /* Coloca los elementos en una columna */
+        align-items: center; /* Centra el contenido */
+        justify-content: flex-start;
+        padding: 20px 0;
+    }
+
+    .header img {
+        position: absolute;
+        top: 15px;
+        left: 20px;
+        width: 50px;
+        height: 50px;
+    }
+
+    .header p {
+        font-size: 1.5em;
+        color: #28a745;
+        margin: 0;
+        text-align: center;
+    }
+
+    .nav {
+        display: flex;
+        justify-content: center; /* Centra los enlaces de navegación */
+        gap: 10px;
+        margin-top: 15px; /* Espacio entre el título y los enlaces */
+        width: 100%;
+    }
+
+    .nav a {
+        font-size: 0.9em; /* Reducir el tamaño de las opciones */
+    }
+
+    .cards {
+        margin-top: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+
+    .card {
+        height: auto;
+        padding: 15px;
+    }
+
+    .card img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .footer {
+        font-size: 0.8em; /* Reducir el tamaño del texto del pie de página */
+    }
+
+    /* Ajustes para la tarjeta de los palos de póker */
+    .right-card {
+        position: relative; /* Asegura que no esté en una posición absoluta */
+        margin-top: 20px; /* Espacio desde el contenedor anterior */
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        width: 100%; /* Hacer la tarjeta del 100% del ancho */
+        max-width: 300px; /* Limitar el ancho máximo */
+        margin-left: auto; /* Centrar la tarjeta horizontalmente */
+        margin-right: auto; /* Centrar la tarjeta horizontalmente */
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+    }
+
+    .card-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+        list-style-type: none;  /* Quitamos las viñetas */
+    }
+
+    .card-img {
+        width: 40px;  /* Hacemos la imagen un poco más grande */
+        height: 40px;
+        object-fit: contain;
+        margin-right: 10px;
+    }
+
+    .card-text {
+        font-size: 1.1em;  /* Un tamaño más pequeño para que quepa mejor */
+        color: #fff;
+    }
+
+    /* Centramos el contenido dentro del .container */
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centra horizontalmente */
+        justify-content: center; /* Centra verticalmente */
+        margin: 50px auto;
+        padding: 30px;
+        background: #222;
+        border-radius: 15px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        width: 80%;  /* Ajustar el ancho para dispositivos móviles */
+        max-width: 600px; /* Limitar el ancho máximo */
+        text-align: center;
+    }
+
+    /* Ajustes para centrar los campos de entrada */
+    .form-input,
+    .form-textarea {
+        width: 90%; /* Asegura que el ancho sea adecuado */
+        max-width: 500px; /* Limita el ancho máximo */
+        margin: 10px auto; /* Centra el campo con margen en ambos lados */
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 1em;
+        background-color: #f9f9f9;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus {
+        border-color: #28a745;
+        outline: none;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="https://i.imgur.com/lrDksOx.png" alt="Logo SpinStats">
+        <p>SpinStats</p>
+        <nav class="nav">
+            <a href="index.html">Inicio</a>
+            <a href="ruleta.html">Ruleta</a>
+            <a href="blackjack.html">Blackjack</a>
+            <a href="poker.html">Poker</a>
+            <a href="slots.html">Slots</a>
+            <a href="adeportivas.html">A. Deportivas</a>
+        </nav>
+    </div>
+
+    <div class="container">
+        <div>
+            <h2>Poker</h2>
+
+            <label for="playerCards">Tus cartas (separadas por comas):</label>
+            <input type="text" id="playerCards" placeholder="Ejemplo: As, Ks">
+
+            <label for="communityCards">Cartas en la mesa (separadas por comas):</label>
+            <input type="text" id="communityCards" placeholder="Ejemplo: 10s, 8d, 3h">
+
+            <button onclick="calculatePokerOdds()">Calcular Probabilidades</button>
+
+            <div id="result" class="result"></div>
+        </div>
+
+        <!-- Tarjeta con los palos de la baraja -->
+    </div>
+    <div class="right-card">
+        <div class="card-item">
+            <img src="https://i.imgur.com/FZecbFA.png" alt="Corazones" class="card-img">
+            <span class="card-text">Corazones(h)</span>
+        </div>
+        <div class="card-item">
+            <img src="https://i.imgur.com/uJtFUam.png" alt="Trébol" class="card-img">
+            <span class="card-text">Trébol(c)</span>
+        </div>
+        <div class="card-item">
+            <img src="https://i.imgur.com/TBHt15k.png" alt="Diamantes" class="card-img">
+            <span class="card-text">Diamantes(d)</span>
+        </div>
+        <div class="card-item">
+            <img src="https://i.imgur.com/I6rtXDq.png" alt="Picas" class="card-img">
+            <span class="card-text">Picas(s)</span>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="footer">
+        &copy; 2025 <a href="#">Términos y Condiciones</a>
+    </div>
+
+    <script>
+        function calculatePokerOdds() {
+            const playerCards = document.getElementById("playerCards").value.split(',').map(c => c.trim());
+            const communityCards = document.getElementById("communityCards").value.split(',').map(c => c.trim());
+
+            if (playerCards.length !== 2 || communityCards.length > 5) {
+                alert("Debes proporcionar 2 cartas para el jugador y hasta 5 cartas para la mesa.");
+                return;
+            }
+
+            const result = simulatePokerOdds(playerCards, communityCards);
+            document.getElementById("result").innerHTML =
+                `<p>Probabilidad de ganar: ${result.win.toFixed(2)}%</p>
+                <p>Probabilidad de empate: ${result.tie.toFixed(2)}%</p>
+                <p>Probabilidad de perder: ${result.lose.toFixed(2)}%</p>`;
+        }
+
+        function simulatePokerOdds(playerCards, communityCards) {
+            const trials = 10000;
+            let win = 0, tie = 0, lose = 0;
+
+            const deck = generateDeck();
+            removeUsedCards(deck, [...playerCards, ...communityCards]);
+
+            for (let i = 0; i < trials; i++) {
+                const simulatedDeck = [...deck];
+                shuffle(simulatedDeck);
+
+                const fullBoard = [...communityCards, ...simulatedDeck.slice(0, 5 - communityCards.length)];
+                const opponentHand = simulatedDeck.slice(5 - communityCards.length, 7 - communityCards.length);
+
+                const playerRank = evaluateHand([...playerCards, ...fullBoard]);
+                const opponentRank = evaluateHand([...opponentHand, ...fullBoard]);
+
+                if (playerRank > opponentRank) win++;
+                else if (playerRank === opponentRank) tie++;
+                else lose++;
+            }
+
+            return {
+                win: (win / trials) * 100,
+                tie: (tie / trials) * 100,
+                lose: (lose / trials) * 100
+            };
+        }
+
+        function generateDeck() {
+            const suits = ['s', 'h', 'd', 'c'];
+            const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+            const deck = [];
+            for (const suit of suits) {
+                for (const value of values) {
+                    deck.push(value + suit);
+                }
+            }
+            return deck;
+        }
+
+        function removeUsedCards(deck, cards) {
+            cards.forEach(card => {
+                const index = deck.indexOf(card);
+                if (index !== -1) deck.splice(index, 1);
+            });
+        }
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function evaluateHand(cards) {
+            const ranks = { "2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "10": 10, "J": 11, "Q": 12, "K": 13, "A": 14 };
+            const suits = cards.map(card => card.slice(-1));
+            const values = cards.map(card => ranks[card.slice(0, -1)]).sort((a, b) => b - a);
+
+            const isFlush = suits.every(suit => suit === suits[0]);
+            const isStraight = values.every((val, i, arr) => i === 0 || val === arr[i - 1] - 1);
+
+            if (isFlush && isStraight && values[0] === 14) return 10; // Escalera Real
+            if (isFlush && isStraight) return 9; // Escalera de Color
+
+            const valueCounts = values.reduce((acc, val) => {
+                acc[val] = (acc[val] || 0) + 1;
+                return acc;
+            }, {});
+
+            const counts = Object.values(valueCounts).sort((a, b) => b - a);
+
+            if (counts[0] === 4) return 8; // Póker
+            if (counts[0] === 3 && counts[1] === 2) return 7; // Full House
+            if (isFlush) return 6; // Color
+            if (isStraight) return 5; // Escalera
+            if (counts[0] === 3) return 4; // Trío
+            if (counts[0] === 2 && counts[1] === 2) return 3; // Doble Pareja
+            if (counts[0] === 2) return 2; // Pareja
+
+            return 1; // Carta Alta
+        }
+    </script>
+</body>
+</html>
