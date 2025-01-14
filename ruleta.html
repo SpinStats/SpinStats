@@ -368,29 +368,25 @@
         &copy; 2025 <a href="#">Términos y Condiciones</a>
     </div>
 
-<script>
-// Probabilidades y valores para la ruleta Europea
-const probabilidades = {
-    color: 18 / 37, // 18 números rojos o negros / 37 total
-    parImpar: 18 / 37, // 18 números pares o impares / 37 total
-    numero: 1 / 37, // Un número específico / 37 total
-};
+    <script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.getElementById("apostarNumeros").addEventListener('change', function () {
+        document.getElementById("numerosOpciones").style.display = this.checked ? 'block' : 'none';
+    });
 
-// Mostrar opciones de entrada cuando se seleccionan
-document.getElementById("apostarNumeros").addEventListener("change", function() {
-    document.getElementById("numerosOpciones").style.display = this.checked ? "block" : "none";
-});
-document.getElementById("apostarColor").addEventListener("change", function() {
-    document.getElementById("colorApostado").style.display = this.checked ? "block" : "none";
-});
-document.getElementById("apostarFila").addEventListener("change", function() {
-    document.getElementById("filaApostada").style.display = this.checked ? "block" : "none";
-});
-document.getElementById("apostarDocena").addEventListener("change", function() {
-    document.getElementById("docenaApostada").style.display = this.checked ? "block" : "none";
+    document.getElementById("apostarColor").addEventListener('change', function () {
+        document.getElementById("colorApostado").style.display = this.checked ? 'block' : 'none';
+    });
+
+    document.getElementById("apostarFila").addEventListener('change', function () {
+        document.getElementById("filaApostada").style.display = this.checked ? 'block' : 'none';
+    });
+
+    document.getElementById("apostarDocena").addEventListener('change', function () {
+        document.getElementById("docenaApostada").style.display = this.checked ? 'block' : 'none';
+    });
 });
 
-// Función para calcular las estadísticas
 function calcularProbabilidades() {
     const cantidadApuesta = parseFloat(document.getElementById("cantidadApuesta").value);
     const numerosElegidos = document.getElementById("numerosElegidos").value.split(',').map(n => parseInt(n.trim()));
@@ -422,24 +418,66 @@ function calcularProbabilidades() {
 
     // Apuesta a color
     if (document.getElementById("apostarColor").checked) {
-        const probabilidadColor = probabilidades.color;
+        const probabilidadColor = 18 / 37; // Probabilidad de ganar a color en la ruleta
         const probabilidadPerderColor = 1 - probabilidadColor;
+        const gananciaColor = cantidadApuesta * 2; // Ganancia por ganar a color
+        const esperanzaColor = (probabilidadColor * gananciaColor) - (probabilidadPerderColor * cantidadApuesta);
+
         resultadoHTML += `
             <p>Probabilidad de ganar a color (rojo o negro): ${(probabilidadColor * 100).toFixed(2)}%</p>
+            <p>Esperanza matemática a color: €${esperanzaColor.toFixed(2)}</p>
         `;
         probabilidadTotalPerder *= probabilidadPerderColor;
-        gananciaMaxima = Math.max(gananciaMaxima, cantidadApuesta * 2);
+        gananciaMaxima = Math.max(gananciaMaxima, gananciaColor);
+        gananciaProbable += esperanzaColor;
     }
 
     // Apuesta a par/impar
     if (document.getElementById("apostarParImpar").checked) {
-        const probabilidadParImpar = probabilidades.parImpar;
+        const probabilidadParImpar = 18 / 37; // Probabilidad de ganar a par/impar en la ruleta
         const probabilidadPerderParImpar = 1 - probabilidadParImpar;
+        const gananciaParImpar = cantidadApuesta * 2; // Ganancia por ganar a par/impar
+        const esperanzaParImpar = (probabilidadParImpar * gananciaParImpar) - (probabilidadPerderParImpar * cantidadApuesta);
+
         resultadoHTML += `
             <p>Probabilidad de ganar a par/impar: ${(probabilidadParImpar * 100).toFixed(2)}%</p>
+            <p>Esperanza matemática a par/impar: €${esperanzaParImpar.toFixed(2)}</p>
         `;
         probabilidadTotalPerder *= probabilidadPerderParImpar;
-        gananciaMaxima = Math.max(gananciaMaxima, cantidadApuesta * 2);
+        gananciaMaxima = Math.max(gananciaMaxima, gananciaParImpar);
+        gananciaProbable += esperanzaParImpar;
+    }
+
+    // Apuesta a fila
+    if (document.getElementById("apostarFila").checked) {
+        const probabilidadFila = 12 / 37; // Probabilidad de ganar a fila en la ruleta
+        const probabilidadPerderFila = 1 - probabilidadFila;
+        const gananciaFila = cantidadApuesta * 3; // Ganancia por ganar a fila
+        const esperanzaFila = (probabilidadFila * gananciaFila) - (probabilidadPerderFila * cantidadApuesta);
+
+        resultadoHTML += `
+            <p>Probabilidad de ganar a fila: ${(probabilidadFila * 100).toFixed(2)}%</p>
+            <p>Esperanza matemática a fila: €${esperanzaFila.toFixed(2)}</p>
+        `;
+        probabilidadTotalPerder *= probabilidadPerderFila;
+        gananciaMaxima = Math.max(gananciaMaxima, gananciaFila);
+        gananciaProbable += esperanzaFila;
+    }
+
+    // Apuesta a docena
+    if (document.getElementById("apostarDocena").checked) {
+        const probabilidadDocena = 12 / 37; // Probabilidad de ganar a docena en la ruleta
+        const probabilidadPerderDocena = 1 - probabilidadDocena;
+        const gananciaDocena = cantidadApuesta * 3; // Ganancia por ganar a docena
+        const esperanzaDocena = (probabilidadDocena * gananciaDocena) - (probabilidadPerderDocena * cantidadApuesta);
+
+        resultadoHTML += `
+            <p>Probabilidad de ganar a docena: ${(probabilidadDocena * 100).toFixed(2)}%</p>
+            <p>Esperanza matemática a docena: €${esperanzaDocena.toFixed(2)}</p>
+        `;
+        probabilidadTotalPerder *= probabilidadPerderDocena;
+        gananciaMaxima = Math.max(gananciaMaxima, gananciaDocena);
+        gananciaProbable += esperanzaDocena;
     }
 
     // Calcular la probabilidad total
@@ -455,6 +493,6 @@ function calcularProbabilidades() {
     document.getElementById("resultado").innerHTML = resultadoHTML;
 }
 </script>
-
+        
 </body>
 </html>
