@@ -377,53 +377,63 @@
     <div class="footer">
         &copy; 2025 <a href="#">Términos y Condiciones</a>
     </div>
-
     <script>
         function calculatePokerOdds() {
             const playerCards = document.getElementById("playerCards").value.split(',').map(c => c.trim());
             const communityCards = document.getElementById("communityCards").value.split(',').map(c => c.trim());
-
+    
             if (playerCards.length !== 2 || communityCards.length > 5) {
                 alert("Debes proporcionar 2 cartas para el jugador y hasta 5 cartas para la mesa.");
                 return;
             }
-
+    
             const result = simulatePokerOdds(playerCards, communityCards);
             document.getElementById("result").innerHTML =
                 `<p>Probabilidad de ganar: ${result.win.toFixed(2)}%</p>
                 <p>Probabilidad de empate: ${result.tie.toFixed(2)}%</p>
                 <p>Probabilidad de perder: ${result.lose.toFixed(2)}%</p>`;
         }
-
+    
         function simulatePokerOdds(playerCards, communityCards) {
             const trials = 10000;
             let win = 0, tie = 0, lose = 0;
-
+    
             const deck = generateDeck();
             removeUsedCards(deck, [...playerCards, ...communityCards]);
-
+    
             for (let i = 0; i < trials; i++) {
                 const simulatedDeck = [...deck];
                 shuffle(simulatedDeck);
-
+    
+                // Completar la mesa con cartas del mazo
                 const fullBoard = [...communityCards, ...simulatedDeck.slice(0, 5 - communityCards.length)];
                 const opponentHand = simulatedDeck.slice(5 - communityCards.length, 7 - communityCards.length);
-
-                const playerRank = evaluateHand([...playerCards, ...fullBoard]);
-                const opponentRank = evaluateHand([...opponentHand, ...fullBoard]);
-
-                if (playerRank > opponentRank) win++;
-                else if (playerRank === opponentRank) tie++;
-                else lose++;
+    
+                // Evaluar las manos
+                const playerHand = [...playerCards, ...fullBoard];
+                const opponentFullHand = [...opponentHand, ...fullBoard];
+    
+                const playerRank = evaluateHand(playerHand);
+                const opponentRank = evaluateHand(opponentFullHand);
+    
+                // Comparar las manos y contar las victorias, empates o pérdidas
+                if (playerRank > opponentRank) {
+                    win++;
+                } else if (playerRank === opponentRank) {
+                    tie++;
+                } else {
+                    lose++;
+                }
             }
-
+    
             return {
                 win: (win / trials) * 100,
                 tie: (tie / trials) * 100,
                 lose: (lose / trials) * 100
             };
         }
-
+    
+        // Función para generar el mazo completo
         function generateDeck() {
             const suits = ['s', 'h', 'd', 'c'];
             const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
@@ -435,49 +445,73 @@
             }
             return deck;
         }
-
+    
+        // Función para eliminar cartas usadas del mazo
         function removeUsedCards(deck, cards) {
             cards.forEach(card => {
                 const index = deck.indexOf(card);
                 if (index !== -1) deck.splice(index, 1);
             });
         }
-
+    
+        // Función para mezclar el mazo
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [array[i], array[j]] = [array[j], array[i]];
             }
         }
-
+    
+        // Evaluar la mano del jugador
         function evaluateHand(cards) {
-            const ranks = { "2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "10": 10, "J": 11, "Q": 12, "K": 13, "A": 14 };
-            const suits = cards.map(card => card.slice(-1));
-            const values = cards.map(card => ranks[card.slice(0, -1)]).sort((a, b) => b - a);
-
-            const isFlush = suits.every(suit => suit === suits[0]);
-            const isStraight = values.every((val, i, arr) => i === 0 || val === arr[i - 1] - 1);
-
-            if (isFlush && isStraight && values[0] === 14) return 10; // Escalera Real
-            if (isFlush && isStraight) return 9; // Escalera de Color
-
-            const valueCounts = values.reduce((acc, val) => {
-                acc[val] = (acc[val] || 0) + 1;
-                return acc;
-            }, {});
-
-            const counts = Object.values(valueCounts).sort((a, b) => b - a);
-
-            if (counts[0] === 4) return 8; // Póker
-            if (counts[0] === 3 && counts[1] === 2) return 7; // Full House
+            const values = cards.map(card => card.slice(0, -1)); // Valores de las cartas
+            const suits = cards.map(card => card.slice(-1)); // Palos de las cartas
+    
+            const valueCounts = countValues(values);  // Contar cuántas veces aparece cada valor
+            const suitCounts = countSuits(suits);    // Contar cuántos palos tiene cada tipo
+    
+            const isFlush = Math.max(...suitCounts) >= 5;  // ¿Hay un color?
+            const isStraight = checkStraight(values);    // ¿Hay una escalera?
+    
+            if (isFlush && isStraight) return 9; // Escalera de color
+            if (valueCounts[0] === 4) return 8;  // Póker
+            if (valueCounts[0] === 3 && valueCounts[1] === 2) return 7; // Full House
             if (isFlush) return 6; // Color
             if (isStraight) return 5; // Escalera
-            if (counts[0] === 3) return 4; // Trío
-            if (counts[0] === 2 && counts[1] === 2) return 3; // Doble Pareja
-            if (counts[0] === 2) return 2; // Pareja
-
-            return 1; // Carta Alta
+            if (valueCounts[0] === 3) return 4; // Trío
+            if (valueCounts[0] === 2 && valueCounts[1] === 2) return 3; // Doble pareja
+            if (valueCounts[0] === 2) return 2; // Pareja
+            return 1; // Carta alta
+        }
+    
+        // Contar cuántas veces aparece cada valor
+        function countValues(values) {
+            const counts = {};
+            values.forEach(value => counts[value] = (counts[value] || 0) + 1);
+            return Object.values(counts).sort((a, b) => b - a);
+        }
+    
+        // Contar cuántos palos tiene cada tipo
+        function countSuits(suits) {
+            const counts = { s: 0, h: 0, d: 0, c: 0 };
+            suits.forEach(suit => counts[suit]++);
+            return Object.values(counts);
+        }
+    
+        // Comprobar si hay una escalera
+        function checkStraight(values) {
+            const uniqueValues = Array.from(new Set(values));
+            const sortedValues = uniqueValues.map(v => ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'].indexOf(v)).sort((a, b) => a - b);
+            for (let i = 0; i < sortedValues.length - 4; i++) {
+                if (sortedValues[i] === sortedValues[i + 1] - 1 && sortedValues[i + 1] === sortedValues[i + 2] - 1 &&
+                    sortedValues[i + 2] === sortedValues[i + 3] - 1 && sortedValues[i + 3] === sortedValues[i + 4] - 1) {
+                    return true;
+                }
+            }
+            return false;
         }
     </script>
+    
+      
 </body>
 </html>
