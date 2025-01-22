@@ -365,7 +365,7 @@
     </div>
 
     <div class="footer">
-        &copy; 2025 <a href="#">Términos y Condiciones</a>
+        &copy; 2025 <a href="TerminoCondiciones.html">Términos y Condiciones</a>
     </div>
 
     <script>
@@ -389,21 +389,31 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 function calcularProbabilidades() {
     const cantidadApuesta = parseFloat(document.getElementById("cantidadApuesta").value);
-    const numerosElegidos = document.getElementById("numerosElegidos").value.split(',').map(n => parseInt(n.trim()));
+    if (isNaN(cantidadApuesta) || cantidadApuesta <= 0) {
+        alert("Por favor, introduce una cantidad válida para apostar.");
+        return;
+    }
+
+    const numerosElegidos = document.getElementById("numerosElegidos").value.split(',').map(n => {
+        const num = parseInt(n.trim());
+        if (isNaN(num) || num < 0 || num > 36) {
+            alert("Por favor, introduce números válidos entre 0 y 36, separados por comas.");
+            throw new Error("Entrada inválida en números específicos.");
+        }
+        return num;
+    });
+
     const cantidadNumeros = numerosElegidos.length;
 
-    // Limpiar resultados anteriores
     let resultadoHTML = "";
-
-    let probabilidadTotalPerder = 1; // Empezamos con la probabilidad de perder en todos los eventos.
+    let probabilidadTotalPerder = 1;
     let gananciaMaxima = 0;
     let gananciaProbable = 0;
 
-    // Apuesta a números específicos
     if (document.getElementById("apostarNumeros").checked && cantidadNumeros > 0) {
         const probabilidadNumeros = (cantidadNumeros / 37);
         const probabilidadPerderNumeros = 1 - probabilidadNumeros;
-        const gananciaNumeros = cantidadApuesta * 35; // Ganancia por ganar a un número
+        const gananciaNumeros = cantidadApuesta * 35;
         const esperanzaNumeros = (probabilidadNumeros * gananciaNumeros) - (probabilidadPerderNumeros * cantidadApuesta);
 
         resultadoHTML += `
@@ -416,11 +426,10 @@ function calcularProbabilidades() {
         gananciaProbable += esperanzaNumeros;
     }
 
-    // Apuesta a color
     if (document.getElementById("apostarColor").checked) {
-        const probabilidadColor = 18 / 37; // Probabilidad de ganar a color en la ruleta
+        const probabilidadColor = 18 / 37;
         const probabilidadPerderColor = 1 - probabilidadColor;
-        const gananciaColor = cantidadApuesta * 2; // Ganancia por ganar a color
+        const gananciaColor = cantidadApuesta * 2;
         const esperanzaColor = (probabilidadColor * gananciaColor) - (probabilidadPerderColor * cantidadApuesta);
 
         resultadoHTML += `
@@ -432,11 +441,10 @@ function calcularProbabilidades() {
         gananciaProbable += esperanzaColor;
     }
 
-    // Apuesta a par/impar
     if (document.getElementById("apostarParImpar").checked) {
-        const probabilidadParImpar = 18 / 37; // Probabilidad de ganar a par/impar en la ruleta
+        const probabilidadParImpar = 18 / 37;
         const probabilidadPerderParImpar = 1 - probabilidadParImpar;
-        const gananciaParImpar = cantidadApuesta * 2; // Ganancia por ganar a par/impar
+        const gananciaParImpar = cantidadApuesta * 2;
         const esperanzaParImpar = (probabilidadParImpar * gananciaParImpar) - (probabilidadPerderParImpar * cantidadApuesta);
 
         resultadoHTML += `
@@ -448,11 +456,10 @@ function calcularProbabilidades() {
         gananciaProbable += esperanzaParImpar;
     }
 
-    // Apuesta a fila
     if (document.getElementById("apostarFila").checked) {
-        const probabilidadFila = 12 / 37; // Probabilidad de ganar a fila en la ruleta
+        const probabilidadFila = 12 / 37;
         const probabilidadPerderFila = 1 - probabilidadFila;
-        const gananciaFila = cantidadApuesta * 3; // Ganancia por ganar a fila
+        const gananciaFila = cantidadApuesta * 3;
         const esperanzaFila = (probabilidadFila * gananciaFila) - (probabilidadPerderFila * cantidadApuesta);
 
         resultadoHTML += `
@@ -464,11 +471,10 @@ function calcularProbabilidades() {
         gananciaProbable += esperanzaFila;
     }
 
-    // Apuesta a docena
     if (document.getElementById("apostarDocena").checked) {
-        const probabilidadDocena = 12 / 37; // Probabilidad de ganar a docena en la ruleta
+        const probabilidadDocena = 12 / 37;
         const probabilidadPerderDocena = 1 - probabilidadDocena;
-        const gananciaDocena = cantidadApuesta * 3; // Ganancia por ganar a docena
+        const gananciaDocena = cantidadApuesta * 3;
         const esperanzaDocena = (probabilidadDocena * gananciaDocena) - (probabilidadPerderDocena * cantidadApuesta);
 
         resultadoHTML += `
@@ -480,10 +486,8 @@ function calcularProbabilidades() {
         gananciaProbable += esperanzaDocena;
     }
 
-    // Calcular la probabilidad total
     const probabilidadTotal = 1 - probabilidadTotalPerder;
 
-    // Mostrar los resultados
     resultadoHTML += `
         <p>Probabilidad total de ganar: ${(probabilidadTotal * 100).toFixed(2)}%</p>
         <p>Ganancia máxima posible: €${gananciaMaxima.toFixed(2)}</p>
@@ -492,6 +496,7 @@ function calcularProbabilidades() {
 
     document.getElementById("resultado").innerHTML = resultadoHTML;
 }
+
 </script>
         
 </body>
