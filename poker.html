@@ -375,15 +375,15 @@
     <br>
     <br>
     <div class="footer">
-        &copy; 2025 <a href="#">Términos y Condiciones</a>
+        &copy; 2025 <a href="TerminoCondiciones.html">Términos y Condiciones</a>
     </div>
     <script>
         function calculatePokerOdds() {
             const playerCards = document.getElementById("playerCards").value.split(',').map(c => c.trim());
             const communityCards = document.getElementById("communityCards").value.split(',').map(c => c.trim());
     
-            if (playerCards.length !== 2 || communityCards.length > 5) {
-                alert("Debes proporcionar 2 cartas para el jugador y hasta 5 cartas para la mesa.");
+            if (!validateCards(playerCards, communityCards)) {
+                alert("Por favor, asegúrate de ingresar cartas válidas y únicas en el formato correcto (e.g., 'As, Kd').");
                 return;
             }
     
@@ -392,6 +392,26 @@
                 `<p>Probabilidad de ganar: ${result.win.toFixed(2)}%</p>
                 <p>Probabilidad de empate: ${result.tie.toFixed(2)}%</p>
                 <p>Probabilidad de perder: ${result.lose.toFixed(2)}%</p>`;
+        }
+    
+        function validateCards(playerCards, communityCards) {
+            const allCards = [...playerCards, ...communityCards];
+            const validSuits = ['s', 'h', 'd', 'c'];
+            const validValues = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+            const cardSet = new Set();
+    
+            for (const card of allCards) {
+                const value = card.slice(0, -1);
+                const suit = card.slice(-1);
+    
+                if (!validValues.includes(value) || !validSuits.includes(suit) || cardSet.has(card)) {
+                    return false; // Carta inválida o duplicada
+                }
+    
+                cardSet.add(card);
+            }
+    
+            return playerCards.length === 2 && communityCards.length <= 5; // Validar cantidad de cartas
         }
     
         function simulatePokerOdds(playerCards, communityCards) {
@@ -433,7 +453,6 @@
             };
         }
     
-        // Función para generar el mazo completo
         function generateDeck() {
             const suits = ['s', 'h', 'd', 'c'];
             const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
@@ -446,7 +465,6 @@
             return deck;
         }
     
-        // Función para eliminar cartas usadas del mazo
         function removeUsedCards(deck, cards) {
             cards.forEach(card => {
                 const index = deck.indexOf(card);
@@ -454,7 +472,6 @@
             });
         }
     
-        // Función para mezclar el mazo
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -462,16 +479,15 @@
             }
         }
     
-        // Evaluar la mano del jugador
         function evaluateHand(cards) {
-            const values = cards.map(card => card.slice(0, -1)); // Valores de las cartas
-            const suits = cards.map(card => card.slice(-1)); // Palos de las cartas
+            const values = cards.map(card => card.slice(0, -1));
+            const suits = cards.map(card => card.slice(-1));
     
-            const valueCounts = countValues(values);  // Contar cuántas veces aparece cada valor
-            const suitCounts = countSuits(suits);    // Contar cuántos palos tiene cada tipo
+            const valueCounts = countValues(values);
+            const suitCounts = countSuits(suits);
     
-            const isFlush = Math.max(...suitCounts) >= 5;  // ¿Hay un color?
-            const isStraight = checkStraight(values);    // ¿Hay una escalera?
+            const isFlush = Math.max(...suitCounts) >= 5;
+            const isStraight = checkStraight(values);
     
             if (isFlush && isStraight) return 9; // Escalera de color
             if (valueCounts[0] === 4) return 8;  // Póker
@@ -484,21 +500,18 @@
             return 1; // Carta alta
         }
     
-        // Contar cuántas veces aparece cada valor
         function countValues(values) {
             const counts = {};
             values.forEach(value => counts[value] = (counts[value] || 0) + 1);
             return Object.values(counts).sort((a, b) => b - a);
         }
     
-        // Contar cuántos palos tiene cada tipo
         function countSuits(suits) {
             const counts = { s: 0, h: 0, d: 0, c: 0 };
             suits.forEach(suit => counts[suit]++);
             return Object.values(counts);
         }
     
-        // Comprobar si hay una escalera
         function checkStraight(values) {
             const uniqueValues = Array.from(new Set(values));
             const sortedValues = uniqueValues.map(v => ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'].indexOf(v)).sort((a, b) => a - b);
@@ -510,7 +523,7 @@
             }
             return false;
         }
-    </script>
+    </script>    
     
       
 </body>
