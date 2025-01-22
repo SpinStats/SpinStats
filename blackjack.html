@@ -255,37 +255,66 @@
     </div>
 
     <div class="footer">
-        &copy; 2025 <a href="#">Términos y Condiciones</a>
+        &copy; 2025 <a href="TerminoCondiciones.html">Términos y Condiciones</a>
     </div>
 
 <script>
-    function calculateProbabilities() {
-        const playerInput = document.getElementById("playerCards").value;
-        const dealerInput = document.getElementById("dealerCard").value;
-        const decksInput = parseInt(document.getElementById("numDecks").value, 10);
-        const betAmount = parseFloat(document.getElementById("betAmount").value);
+function calculateProbabilities() {
+    const playerInput = document.getElementById("playerCards").value;
+    const dealerInput = document.getElementById("dealerCard").value;
+    const decksInput = parseInt(document.getElementById("numDecks").value, 10);
+    const betAmount = parseFloat(document.getElementById("betAmount").value);
 
-        if (!playerInput || !dealerInput || isNaN(decksInput) || decksInput <= 0 || isNaN(betAmount) || betAmount <= 0) {
-            alert("Por favor, completa todos los campos correctamente.");
-            return;
-        }
+    // Validaciones
+    const validCards = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 
-        const playerCards = playerInput.split(',').map(card => card.trim());
-        const dealerCard = dealerInput.trim();
-
-        const probabilities = calculateBlackjackProbabilities(playerCards, dealerCard, decksInput);
-
-        const potentialWin = betAmount * 2;
-        const potentialLose = betAmount;
-
-        document.getElementById("resultado").innerHTML = `
-            <p>Probabilidad de ganar: ${probabilities.win.toFixed(2)}%</p>
-            <p>Probabilidad de empatar: ${probabilities.tie.toFixed(2)}%</p>
-            <p>Probabilidad de perder: ${probabilities.lose.toFixed(2)}%</p>
-            <p>Ganancia potencial: $${potentialWin.toFixed(2)}</p>
-            <p>Pérdida potencial: $${potentialLose.toFixed(2)}</p>
-        `;
+    if (!playerInput) {
+        alert("Por favor, ingresa las cartas del jugador.");
+        return;
     }
+
+    if (!dealerInput) {
+        alert("Por favor, ingresa la carta visible del crupier.");
+        return;
+    }
+
+    const playerCards = playerInput.split(',').map(card => card.trim().toUpperCase());
+    const dealerCard = dealerInput.trim().toUpperCase();
+
+    if (!playerCards.every(card => validCards.includes(card))) {
+        alert("Cartas del jugador no válidas. Usa valores como: A, 2, 3, ..., 10, J, Q, K.");
+        return;
+    }
+
+    if (!validCards.includes(dealerCard)) {
+        alert("Carta del crupier no válida. Usa valores como: A, 2, 3, ..., 10, J, Q, K.");
+        return;
+    }
+
+    if (isNaN(decksInput) || decksInput <= 0) {
+        alert("El número de barajas debe ser un número entero positivo.");
+        return;
+    }
+
+    if (isNaN(betAmount) || betAmount <= 0) {
+        alert("La cantidad apostada debe ser un número mayor a 0.");
+        return;
+    }
+
+    // Cálculo de probabilidades
+    const probabilities = calculateBlackjackProbabilities(playerCards, dealerCard, decksInput);
+
+    const potentialWin = betAmount * 2;
+    const potentialLose = betAmount;
+
+    document.getElementById("resultado").innerHTML = `
+        <p>Probabilidad de ganar: ${probabilities.win.toFixed(2)}%</p>
+        <p>Probabilidad de empatar: ${probabilities.tie.toFixed(2)}%</p>
+        <p>Probabilidad de perder: ${probabilities.lose.toFixed(2)}%</p>
+        <p>Ganancia potencial: $${potentialWin.toFixed(2)}</p>
+        <p>Pérdida potencial: $${potentialLose.toFixed(2)}</p>
+    `;
+}
 
     function calculateBlackjackProbabilities(playerCards, dealerCard, decks = 1) {
         function cardValue(card) {
