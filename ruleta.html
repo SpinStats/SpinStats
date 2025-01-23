@@ -369,135 +369,135 @@
     </div>
 
     <script>
-document.addEventListener('DOMContentLoaded', (event) => {
-    document.getElementById("apostarNumeros").addEventListener('change', function () {
-        document.getElementById("numerosOpciones").style.display = this.checked ? 'block' : 'none';
-    });
-
-    document.getElementById("apostarColor").addEventListener('change', function () {
-        document.getElementById("colorApostado").style.display = this.checked ? 'block' : 'none';
-    });
-
-    document.getElementById("apostarFila").addEventListener('change', function () {
-        document.getElementById("filaApostada").style.display = this.checked ? 'block' : 'none';
-    });
-
-    document.getElementById("apostarDocena").addEventListener('change', function () {
-        document.getElementById("docenaApostada").style.display = this.checked ? 'block' : 'none';
-    });
-});
-
-function calcularProbabilidades() {
-    const cantidadApuesta = parseFloat(document.getElementById("cantidadApuesta").value);
-    if (isNaN(cantidadApuesta) || cantidadApuesta <= 0) {
-        alert("Por favor, introduce una cantidad válida para apostar.");
-        return;
-    }
-
-    const numerosElegidos = document.getElementById("numerosElegidos").value.split(',').map(n => {
-        const num = parseInt(n.trim());
-        if (isNaN(num) || num < 0 || num > 36) {
-            alert("Por favor, introduce números válidos entre 0 y 36, separados por comas.");
-            throw new Error("Entrada inválida en números específicos.");
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.getElementById("apostarNumeros").addEventListener('change', function () {
+                document.getElementById("numerosOpciones").style.display = this.checked ? 'block' : 'none';
+            });
+        
+            document.getElementById("apostarColor").addEventListener('change', function () {
+                document.getElementById("colorApostado").style.display = this.checked ? 'block' : 'none';
+            });
+        
+            document.getElementById("apostarFila").addEventListener('change', function () {
+                document.getElementById("filaApostada").style.display = this.checked ? 'block' : 'none';
+            });
+        
+            document.getElementById("apostarDocena").addEventListener('change', function () {
+                document.getElementById("docenaApostada").style.display = this.checked ? 'block' : 'none';
+            });
+        });
+        
+        function calcularProbabilidades() {
+            const cantidadApuesta = parseFloat(document.getElementById("cantidadApuesta").value);
+            if (isNaN(cantidadApuesta) || cantidadApuesta <= 0) {
+                alert("Por favor, introduce una cantidad válida para apostar.");
+                return;
+            }
+        
+            let resultadoHTML = "";
+            let probabilidadTotalPerder = 1;
+            let gananciaMaxima = 0;
+            let gananciaProbable = 0;
+        
+            if (document.getElementById("apostarNumeros").checked) {
+                const numerosElegidos = document.getElementById("numerosElegidos").value.split(',').map(n => {
+                    const num = parseInt(n.trim());
+                    if (isNaN(num) || num < 0 || num > 36) {
+                        alert("Por favor, introduce números válidos entre 0 y 36, separados por comas.");
+                        throw new Error("Entrada inválida en números específicos.");
+                    }
+                    return num;
+                });
+        
+                const cantidadNumeros = numerosElegidos.length;
+                if (cantidadNumeros > 0) {
+                    const probabilidadNumeros = (cantidadNumeros / 37);
+                    const probabilidadPerderNumeros = 1 - probabilidadNumeros;
+                    const gananciaNumeros = cantidadApuesta * 35;
+                    const esperanzaNumeros = (probabilidadNumeros * gananciaNumeros) - (probabilidadPerderNumeros * cantidadApuesta);
+        
+                    resultadoHTML += `
+                        <p>Probabilidad de ganar a alguno de los números elegidos: ${(probabilidadNumeros * 100).toFixed(2)}%</p>
+                        <p>Probabilidad de perder con esos números: ${(probabilidadPerderNumeros * 100).toFixed(2)}%</p>
+                        <p>Esperanza matemática a esos números: €${esperanzaNumeros.toFixed(2)}</p>
+                    `;
+                    probabilidadTotalPerder *= probabilidadPerderNumeros;
+                    gananciaMaxima = Math.max(gananciaMaxima, gananciaNumeros);
+                    gananciaProbable += esperanzaNumeros;
+                }
+            }
+        
+            if (document.getElementById("apostarColor").checked) {
+                const probabilidadColor = 18 / 37;
+                const probabilidadPerderColor = 1 - probabilidadColor;
+                const gananciaColor = cantidadApuesta * 2;
+                const esperanzaColor = (probabilidadColor * gananciaColor) - (probabilidadPerderColor * cantidadApuesta);
+        
+                resultadoHTML += `
+                    <p>Probabilidad de ganar a color (rojo o negro): ${(probabilidadColor * 100).toFixed(2)}%</p>
+                    <p>Esperanza matemática a color: €${esperanzaColor.toFixed(2)}</p>
+                `;
+                probabilidadTotalPerder *= probabilidadPerderColor;
+                gananciaMaxima = Math.max(gananciaMaxima, gananciaColor);
+                gananciaProbable += esperanzaColor;
+            }
+        
+            if (document.getElementById("apostarParImpar").checked) {
+                const probabilidadParImpar = 18 / 37;
+                const probabilidadPerderParImpar = 1 - probabilidadParImpar;
+                const gananciaParImpar = cantidadApuesta * 2;
+                const esperanzaParImpar = (probabilidadParImpar * gananciaParImpar) - (probabilidadPerderParImpar * cantidadApuesta);
+        
+                resultadoHTML += `
+                    <p>Probabilidad de ganar a par/impar: ${(probabilidadParImpar * 100).toFixed(2)}%</p>
+                    <p>Esperanza matemática a par/impar: €${esperanzaParImpar.toFixed(2)}</p>
+                `;
+                probabilidadTotalPerder *= probabilidadPerderParImpar;
+                gananciaMaxima = Math.max(gananciaMaxima, gananciaParImpar);
+                gananciaProbable += esperanzaParImpar;
+            }
+        
+            if (document.getElementById("apostarFila").checked) {
+                const probabilidadFila = 12 / 37;
+                const probabilidadPerderFila = 1 - probabilidadFila;
+                const gananciaFila = cantidadApuesta * 3;
+                const esperanzaFila = (probabilidadFila * gananciaFila) - (probabilidadPerderFila * cantidadApuesta);
+        
+                resultadoHTML += `
+                    <p>Probabilidad de ganar a fila: ${(probabilidadFila * 100).toFixed(2)}%</p>
+                    <p>Esperanza matemática a fila: €${esperanzaFila.toFixed(2)}</p>
+                `;
+                probabilidadTotalPerder *= probabilidadPerderFila;
+                gananciaMaxima = Math.max(gananciaMaxima, gananciaFila);
+                gananciaProbable += esperanzaFila;
+            }
+        
+            if (document.getElementById("apostarDocena").checked) {
+                const probabilidadDocena = 12 / 37;
+                const probabilidadPerderDocena = 1 - probabilidadDocena;
+                const gananciaDocena = cantidadApuesta * 3;
+                const esperanzaDocena = (probabilidadDocena * gananciaDocena) - (probabilidadPerderDocena * cantidadApuesta);
+        
+                resultadoHTML += `
+                    <p>Probabilidad de ganar a docena: ${(probabilidadDocena * 100).toFixed(2)}%</p>
+                    <p>Esperanza matemática a docena: €${esperanzaDocena.toFixed(2)}</p>
+                `;
+                probabilidadTotalPerder *= probabilidadPerderDocena;
+                gananciaMaxima = Math.max(gananciaMaxima, gananciaDocena);
+                gananciaProbable += esperanzaDocena;
+            }
+        
+            const probabilidadTotal = 1 - probabilidadTotalPerder;
+        
+            resultadoHTML += `
+                <p>Probabilidad total de ganar: ${(probabilidadTotal * 100).toFixed(2)}%</p>
+                <p>Ganancia máxima posible: €${gananciaMaxima.toFixed(2)}</p>
+                <p>Ganancia probable: €${gananciaProbable.toFixed(2)}</p>
+            `;
+        
+            document.getElementById("resultado").innerHTML = resultadoHTML;
         }
-        return num;
-    });
-
-    const cantidadNumeros = numerosElegidos.length;
-
-    let resultadoHTML = "";
-    let probabilidadTotalPerder = 1;
-    let gananciaMaxima = 0;
-    let gananciaProbable = 0;
-
-    if (document.getElementById("apostarNumeros").checked && cantidadNumeros > 0) {
-        const probabilidadNumeros = (cantidadNumeros / 37);
-        const probabilidadPerderNumeros = 1 - probabilidadNumeros;
-        const gananciaNumeros = cantidadApuesta * 35;
-        const esperanzaNumeros = (probabilidadNumeros * gananciaNumeros) - (probabilidadPerderNumeros * cantidadApuesta);
-
-        resultadoHTML += `
-            <p>Probabilidad de ganar a alguno de los números elegidos: ${(probabilidadNumeros * 100).toFixed(2)}%</p>
-            <p>Probabilidad de perder con esos números: ${(probabilidadPerderNumeros * 100).toFixed(2)}%</p>
-            <p>Esperanza matemática a esos números: €${esperanzaNumeros.toFixed(2)}</p>
-        `;
-        probabilidadTotalPerder *= probabilidadPerderNumeros;
-        gananciaMaxima = Math.max(gananciaMaxima, gananciaNumeros);
-        gananciaProbable += esperanzaNumeros;
-    }
-
-    if (document.getElementById("apostarColor").checked) {
-        const probabilidadColor = 18 / 37;
-        const probabilidadPerderColor = 1 - probabilidadColor;
-        const gananciaColor = cantidadApuesta * 2;
-        const esperanzaColor = (probabilidadColor * gananciaColor) - (probabilidadPerderColor * cantidadApuesta);
-
-        resultadoHTML += `
-            <p>Probabilidad de ganar a color (rojo o negro): ${(probabilidadColor * 100).toFixed(2)}%</p>
-            <p>Esperanza matemática a color: €${esperanzaColor.toFixed(2)}</p>
-        `;
-        probabilidadTotalPerder *= probabilidadPerderColor;
-        gananciaMaxima = Math.max(gananciaMaxima, gananciaColor);
-        gananciaProbable += esperanzaColor;
-    }
-
-    if (document.getElementById("apostarParImpar").checked) {
-        const probabilidadParImpar = 18 / 37;
-        const probabilidadPerderParImpar = 1 - probabilidadParImpar;
-        const gananciaParImpar = cantidadApuesta * 2;
-        const esperanzaParImpar = (probabilidadParImpar * gananciaParImpar) - (probabilidadPerderParImpar * cantidadApuesta);
-
-        resultadoHTML += `
-            <p>Probabilidad de ganar a par/impar: ${(probabilidadParImpar * 100).toFixed(2)}%</p>
-            <p>Esperanza matemática a par/impar: €${esperanzaParImpar.toFixed(2)}</p>
-        `;
-        probabilidadTotalPerder *= probabilidadPerderParImpar;
-        gananciaMaxima = Math.max(gananciaMaxima, gananciaParImpar);
-        gananciaProbable += esperanzaParImpar;
-    }
-
-    if (document.getElementById("apostarFila").checked) {
-        const probabilidadFila = 12 / 37;
-        const probabilidadPerderFila = 1 - probabilidadFila;
-        const gananciaFila = cantidadApuesta * 3;
-        const esperanzaFila = (probabilidadFila * gananciaFila) - (probabilidadPerderFila * cantidadApuesta);
-
-        resultadoHTML += `
-            <p>Probabilidad de ganar a fila: ${(probabilidadFila * 100).toFixed(2)}%</p>
-            <p>Esperanza matemática a fila: €${esperanzaFila.toFixed(2)}</p>
-        `;
-        probabilidadTotalPerder *= probabilidadPerderFila;
-        gananciaMaxima = Math.max(gananciaMaxima, gananciaFila);
-        gananciaProbable += esperanzaFila;
-    }
-
-    if (document.getElementById("apostarDocena").checked) {
-        const probabilidadDocena = 12 / 37;
-        const probabilidadPerderDocena = 1 - probabilidadDocena;
-        const gananciaDocena = cantidadApuesta * 3;
-        const esperanzaDocena = (probabilidadDocena * gananciaDocena) - (probabilidadPerderDocena * cantidadApuesta);
-
-        resultadoHTML += `
-            <p>Probabilidad de ganar a docena: ${(probabilidadDocena * 100).toFixed(2)}%</p>
-            <p>Esperanza matemática a docena: €${esperanzaDocena.toFixed(2)}</p>
-        `;
-        probabilidadTotalPerder *= probabilidadPerderDocena;
-        gananciaMaxima = Math.max(gananciaMaxima, gananciaDocena);
-        gananciaProbable += esperanzaDocena;
-    }
-
-    const probabilidadTotal = 1 - probabilidadTotalPerder;
-
-    resultadoHTML += `
-        <p>Probabilidad total de ganar: ${(probabilidadTotal * 100).toFixed(2)}%</p>
-        <p>Ganancia máxima posible: €${gananciaMaxima.toFixed(2)}</p>
-        <p>Ganancia probable: €${gananciaProbable.toFixed(2)}</p>
-    `;
-
-    document.getElementById("resultado").innerHTML = resultadoHTML;
-}
-
-</script>
+        </script>  
         
 </body>
 </html>
