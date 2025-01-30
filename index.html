@@ -66,13 +66,27 @@
             margin-top: 30px;
         }
 
+        .welcome-message {
+            font-size: 4.5em; /* Aumenta el tamaño de la fuente */
+            color: #28a745;
+            margin-bottom: 20px;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Centra el mensaje en la pantalla */
+            animation: fadeOut 3s forwards;
+        }
+
         .cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 20px;
             width: 100%;
-            max-width: 1000px;
+            max-width:1300px;
             margin-top: 20px;
+            opacity: 0;
+            animation: showCards 1s 3s forwards;
         }
 
         .card {
@@ -80,6 +94,7 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 15px;
             height: 350px;
+            width: 175px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -91,7 +106,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             opacity: 0;
             animation: fadeIn 1s forwards;
-            padding: 20px;
+            padding: 10px;
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
@@ -127,11 +142,26 @@
             color: rgba(255, 255, 255, 0.7);
         }
 
-        .card:nth-child(1) { animation-delay: 0.2s; }
-        .card:nth-child(2) { animation-delay: 0.4s; }
-        .card:nth-child(3) { animation-delay: 0.6s; }
-        .card:nth-child(4) { animation-delay: 0.8s; }
-        .card:nth-child(5) { animation-delay: 1s; }
+        .card:nth-child(1) { animation-delay: 3.2s; }
+        .card:nth-child(2) { animation-delay: 3.4s; }
+        .card:nth-child(3) { animation-delay: 3.6s; }
+        .card:nth-child(4) { animation-delay: 3.8s; }
+        .card:nth-child(5) { animation-delay: 4s; }
+        .card:nth-child(6) { animation-delay: 4.2s; }
+
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            100% { opacity: 0; display: none; }
+        }
+
+        @keyframes showCards {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
 
         @keyframes fadeIn {
             from {
@@ -150,7 +180,7 @@
             text-align: center;
             color: #666;
             font-size: 0.9em;
-            margin-top: 30px;
+            margin-top: 150px;
             border-top: 2px solid #222;
         }
 
@@ -165,60 +195,61 @@
 
         /* Ajustes responsivos */
         @media (max-width: 768px) {
-    .header {
-        display: flex;
-        flex-direction: column; /* Coloca los elementos en una columna */
-        align-items: center; /* Centra el contenido */
-        justify-content: flex-start;
-        padding: 20px 0;
-    }
+            .header {
+                display: flex;
+                flex-direction: column; /* Coloca los elementos en una columna */
+                align-items: center; /* Centra el contenido */
+                justify-content: flex-start;
+                padding: 20px 0;
+            }
 
-    .header img {
-        position: absolute;
-        top: 15px;
-        left: 20px;
-        width: 50px;
-        height: 50px;
-    }
+            .header img {
+                position: absolute;
+                top: 15px;
+                left: 20px;
+                width: 50px;
+                height: 50px;
+            }
 
-    .header p {
-        font-size: 1.5em;
-        color: #28a745;
-        margin: 0;
-        text-align: center;
-    }
+            .header p {
+                font-size: 1.5em;
+                color: #28a745;
+                margin: 0;
+                text-align: center;
+            }
 
-    .nav {
-        display: flex;
-        justify-content: center; /* Centra los enlaces de navegación */
-        gap: 10px;
-        margin-top: 15px; /* Espacio entre el título y los enlaces */
-        width: 100%;
-    }
+            .nav {
+                display: flex;
+                justify-content: center; /* Centra los enlaces de navegación */
+                gap: 10px;
+                margin-top: 15px; /* Espacio entre el título y los enlaces */
+                width: 100%;
+            }
 
-    .nav a {
-        font-size: 0.9em; /* Reducir el tamaño de las opciones */
-    }
+            .nav a {
+                font-size: 0.9em; /* Reducir el tamaño de las opciones */
+            }
 
-    .cards {
-        margin-top: 20px;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    }
+            .cards {
+                margin-top: 20px;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
 
-    .card {
-        height: auto;
-        padding: 15px;
-    }
+            .card {
+                height: auto;
+                padding: 15px;
+                width: 150px;
+            }
 
-    .card img {
-        width: 100px;
-        height: 100px;
-    }
+            .card img {
+                width: 100px;
+                height: 100px;
+            }
 
-    .footer {
-        font-size: 0.8em; /* Reducir el tamaño del texto del pie de página */
-    }
-}
+            .footer {
+                font-size: 0.8em; /* Reducir el tamaño del texto del pie de página */
+            }
+        }
     </style>
 </head>
 <body>
@@ -232,11 +263,12 @@
             <a href="poker.html">Poker</a>
             <a href="slots.html">Slots</a>
             <a href="adeportivas.html">A. Deportivas</a>
+            <a href="estrategias.html">Estrategias</a>
         </nav>
     </div>
 
     <div class="main-container">
-        <h2>Bienvenido a SpinStats</h2>
+        <h2 class="welcome-message">Juega con ventaja</h2>
         <div class="cards">
             <div class="card">
                 <a href="ruleta.html">
@@ -274,11 +306,24 @@
                     <span>Conoce las mejores apuestas deportivas</span>
                 </a>
             </div>
+            <div class="card">
+                <a href="estrategias.html">
+                    <img src="https://i.imgur.com/0lZiugF.png" alt="Icono Tarjeta 3">
+                    <p>Estrategias</p>
+                    <span>Conoce las mejores estrategias</span>
+                </a>
+            </div>
         </div>
     </div>
 
     <div class="footer">
         &copy; 2025 <a href="TerminoCondiciones.html">Términos y Condiciones</a>
     </div>
+
+    <script>
+        setTimeout(function() {
+            document.querySelector('.welcome-message').style.display = 'none';
+        }, 3000);
+    </script>
 </body>
 </html>

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpinStats</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://i.imgur.com/EESckqO.png" type="image/png">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom, #1e1e2f, #0c0c12);
+            margin: 0;
+            padding: 0;
+            color: white;
+        }
+
+        .header {
+            background-color: #111;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            flex-wrap: wrap;
+        }
+
+        .header img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            margin-right: 15px;
+        }
+
+        .header p {
+            font-size: 1.8em;
+            color: #28a745;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .nav {
+            display: flex;
+            gap: 15px;
+            margin-left: auto;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: #28a745;
+        }
+        .options-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .options-container a {
+            text-decoration: none;
+            font-size: 1.5em;
+            color: #28a745;
+            margin: 0 15px;
+            padding: 10px 20px;
+            border: 2px solid #28a745;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .options-container a:hover {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            justify-content: center;
+            align-items: center;
+            width: 75%;
+            max-width: 1300px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            height: 450px;
+            width: 280px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2em;
+            text-align: center;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+            padding: 25px;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, height 0.3s ease-in-out, width 0.3s ease-in-out;
+            position: relative;
+            margin: 0;
+            z-index: 1;
+            transform-origin: center;
+        }
+
+        .card:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 24px rgba(255, 255, 255, 0.5);
+            height: 600px;
+            width: 350px;
+            z-index: 10;
+        }
+
+        .card a {
+            text-decoration: none;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100%;
+        }
+
+        .card img {
+            width: 180px;
+            height: 180px;
+            object-fit: contain;
+            margin-bottom: 20px;
+        }
+
+        .card p {
+            margin: 15px 0;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        .card span {
+            font-size: 1.1em;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .card .details {
+            display: none;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .card:hover .details {
+            display: block;
+        }
+
+        h2 {
+            font-size: 3.5em;
+            font-weight: bold;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #28a745;
+        }
+        .footer {
+            background: #111;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 150px;
+            border-top: 2px solid #222;
+        }
+
+        .footer a {
+            color: #28a745;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                display: flex;
+                flex-direction: column; /* Coloca los elementos en una columna */
+                align-items: center; /* Centra el contenido */
+                justify-content: flex-start;
+                padding: 20px 0;
+            }
+
+            .header img {
+                position: absolute;
+                top: 15px;
+                left: 20px;
+                width: 50px;
+                height: 50px;
+            }
+
+            .header p {
+                font-size: 1.5em;
+                color: #28a745;
+                margin: 0;
+                text-align: center;
+            }
+
+            .nav {
+                display: flex;
+                justify-content: center; /* Centra los enlaces de navegación */
+                gap: 10px;
+                margin-top: 15px; /* Espacio entre el título y los enlaces */
+                width: 100%;
+            }
+
+            .nav a {
+                font-size: 0.9em; /* Reducir el tamaño de las opciones */
+            }
+            
+            .cards {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 20px;
+                width: 50%;
+                padding: 0;
+                margin: auto;
+                margin-left: 0px;
+                margin-right: 10px;
+            }
+
+            .card {
+                width: 100%;
+                margin-bottom: 15px;
+                height: auto;
+                padding: 20px;
+                text-align: center;
+                box-shadow: none;
+                border-radius: 10px;
+            }
+
+            .card p {
+                font-size: 1.1em;
+            }
+
+            .card span {
+                font-size: 1em;
+            }
+
+            .card .details {
+                font-size: 0.9em;
+                margin-top: 10px;
+            }
+            .footer {
+                font-size: 0.8em; /* Reducir el tamaño del texto del pie de página */
+            }
+
+
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="https://i.imgur.com/lrDksOx.png" alt="Logo SpinStats">
+        <p>SpinStats</p>
+        <nav class="nav">
+            <a href="index.html">Inicio</a>
+            <a href="ruleta.html">Ruleta</a>
+            <a href="blackjack.html">Blackjack</a>
+            <a href="poker.html">Poker</a>
+            <a href="slots.html">Slots</a>
+            <a href="adeportivas.html">A. Deportivas</a>
+            <a href="estrategias.html">Estrategias</a>
+        </nav>
+    </div>
+
+    <div class="options-container">
+        <a href="#ruleta">Ruleta</a>
+        <a href="#blackjack">Blackjack</a>
+        <a href="#poker">Póker</a>
+    </div>
+
+    <div class="main-container">
+        <h2 id="ruleta">Ruleta</h2>
+<div class="cards">
+    <div class="card">
+        <p>Estrategia James Bond</p>
+        <span>Divide las apuestas entre números altos, medios y el 0</span>
+        <div class="details">
+            <p>La estrategia James Bond consiste en dividir la apuesta de manera que cubra más de la mitad de la ruleta. Se apuesta una cantidad al 0, otra a los números altos y otra a los números medios. Ideal para quienes buscan una cobertura amplia.</p>
+        </div>
+    </div>
+    <div class="card">
+        <p>Estrategia Martingala</p>
+        <span>Duplica la apuesta tras cada pérdida hasta ganar</span>
+        <div class="details">
+            <p>La estrategia Martingala es una técnica de apuestas en la que duplicas tu apuesta después de cada pérdida, buscando recuperar todas las pérdidas cuando finalmente se gana una apuesta.</p>
+        </div>
+    </div>
+    <div class="card">
+        <p>Estrategia Fibonacci</p>
+        <span>Aumenta la apuesta según la secuencia de Fibonacci tras perder</span>
+        <div class="details">
+            <p>La estrategia Fibonacci sigue la famosa secuencia matemática, donde cada número es la suma de los dos anteriores. Aumentas la apuesta según la secuencia después de perder, lo que minimiza las pérdidas a largo plazo.</p>
+        </div>
+    </div>
+    <div class="card">
+        <p>Estrategia D'Alembert</p>
+        <span>Aumenta o disminuye la apuesta de forma moderada</span>
+        <div class="details">
+            <p>La estrategia D'Alembert se basa en aumentar la apuesta en una unidad tras una pérdida y disminuirla en una unidad tras una victoria. Se considera más equilibrada que la Martingala.</p>
+        </div>
+    </div>
+    <div class="card">
+        <p>Estrategia Labouchere</p>
+        <span>Crea una secuencia y apuesta la suma de los extremos</span>
+        <div class="details">
+            <p>La estrategia Labouchere se basa en crear una secuencia de números, donde apuestas la suma de los extremos de la secuencia. Tras una victoria, se eliminan esos números; tras una pérdida, se añaden nuevos números al final.</p>
+        </div>
+    </div>
+    <div class="card">
+        <p>Estrategia de Apuestas en Columna</p>
+        <span>Apuesta a una columna específica para mayor probabilidad de acierto</span>
+        <div class="details">
+            <p>Esta estrategia se basa en apostar a una de las tres columnas de la ruleta. Al cubrir 12 números con una sola apuesta, tienes una mayor probabilidad de ganar, aunque con un pago más bajo.</p>
+        </div>
+    </div>
+</div>
+
+<h2 id="blackjack">Blackjack</h2>
+<div class="cards">
+    <div class="card">
+        <p>Estrategia Básica</p>
+        <span>Jugada óptima basada en la probabilidad matemática</span>
+        <div class="details">
+            <p>La estrategia básica de blackjack está basada en probabilidades matemáticas y proporciona la jugada más ventajosa según tu mano y la carta visible del crupier. Ejemplo: plantarse con 17 o más y pedir carta con 8 o menos.</p>
+        </div>
+    </div>
+    <div class="card">
+        <p>Conteo de Cartas</p>
+        <span>Contabiliza las cartas para predecir las probabilidades</span>
+        <div class="details">
+            <p>El conteo de cartas es una estrategia avanzada donde se sigue la cantidad de cartas altas y bajas en el mazo. Permite anticipar cuándo es más probable que salgan cartas favorables.</p>
+        </div>
+    </div>
+    <div class="card">
+        <p>Estrategia Hi-Lo</p>
+        <span>Usa un sistema de conteo simple basado en +1 y -1</span>
+        <div class="details">
+            <p>La estrategia Hi-Lo es un sistema de conteo de cartas en el que se asignan valores a las cartas: +1 a las cartas bajas (2-6), 0 a las cartas medias (7-9) y -1 a las cartas altas (10-A). Esto permite hacer apuestas más informadas.</p>
+        </div>
+    </div>
+    <div class="card">
+        <p>Reajuste de Apuestas</p>
+        <span>Varía las apuestas según la situación de la mano</span>
+        <div class="details">
+            <p>Esta estrategia se basa en ajustar las apuestas dependiendo de la fuerza de la mano y las cartas visibles del crupier. Si las probabilidades están a tu favor, puedes aumentar la apuesta; si no, hacer una apuesta mínima.</p>
+        </div>
+    </div>
+    <div class="card">
+        <p>Evitar Seguros</p>
+        <span>No apuestes por el seguro cuando el crupier tenga un As visible</span>
+        <div class="details">
+            <p>La opción de seguro en blackjack es a menudo una trampa para el jugador, ya que las probabilidades de que el crupier tenga un blackjack real no son tan altas. Se recomienda evitar esta apuesta adicional.</p>
+        </div>
+    </div>
+    <div class="card">
+        <p>Estrategia de Doble o Nada</p>
+        <span>Apuesta el doble en manos fuertes</span>
+        <div class="details">
+            <p>Esta estrategia consiste en doblar tu apuesta cuando tienes una mano fuerte (como 10 o 11), lo que aumenta tus ganancias potenciales. Debes hacerlo solo cuando el crupier tenga una carta débil visible.</p>
+        </div>
+    </div>
+</div>
+
+<h2 id="poker">Póker</h2>
+<div class="cards">
+    <div class="card">
+        <p>Estrategia Tight-Aggressive (TAG)</p>
+        <span>Juega pocas manos pero agresivamente</span>
+        <div class="details">
+            <p>La estrategia TAG se basa en ser selectivo con las manos que juegas, pero cuando decides entrar en una mano, lo haces de manera agresiva para maximizar tus ganancias.</p>
+        </div>
+    </div>
+    <div class="card">
+        <p>Estrategia Loose-Aggressive (LAG)</p>
+        <span>Juega muchas manos y apuesta agresivamente</span>
+        <div class="details">
+            <p>La estrategia LAG se basa en jugar una mayor cantidad de manos y ser agresivo con ellas. Es ideal para jugadores que buscan mantener presión sobre sus oponentes.</p>
+        </div>
+    </div>
+    <div class="card">
+        <p>Estrategia de Posición</p>
+        <span>Aprovecha tu posición en la mesa para controlar el juego</span>
+        <div class="details">
+            <p>La posición en la mesa es crucial en el póker. Ser uno de los últimos en actuar te da una ventaja estratégica, ya que puedes ver las decisiones de tus oponentes antes de hacer la tuya.</p>
+        </div>
+    </div>
+    <div class="card">
+        <p>Bluffing (Faroles)</p>
+        <span>Engaña a tus oponentes para que se retiren con manos débiles</span>
+        <div class="details">
+            <p>El bluffing es un componente clave del póker. Hacer que tus oponentes crean que tienes una mano fuerte cuando en realidad no la tienes puede ganar la mano sin necesidad de mostrar cartas fuertes.</p>
+        </div>
+    </div>
+    <div class="card">
+        <p>Jugar de Manera Conservadora</p>
+        <span>Evita arriesgarse demasiado y juega de forma estable</span>
+        <div class="details">
+            <p>La estrategia conservadora se basa en evitar grandes riesgos y jugar solo las manos que tienen una alta probabilidad de ganar. Esta estrategia es ideal para principiantes o jugadores que prefieren evitar grandes pérdidas.</p>
+        </div>
+    </div>
+    <div class="card">
+        <p>Estrategia de Control del Pot</p>
+        <span>Controla el tamaño del pozo para proteger tus ganancias</span>
+        <div class="details">
+            <p>Controlar el tamaño del pozo es vital para evitar que otros jugadores te desborden. Puedes aumentar las apuestas cuando tengas una mano fuerte y limitar las pérdidas en manos débiles.</p>
+        </div>
+    </div>
+</div>
+
+    </div>
+
+    <div class="footer">
+        &copy; 2025 <a href="TerminoCondiciones.html">Términos y Condiciones</a>
+    </div>
+</body>
+</html>
