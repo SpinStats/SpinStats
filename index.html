@@ -66,17 +66,31 @@
             margin-top: 30px;
         }
 
-        .welcome-message {
-            font-size: 4.5em; /* Aumenta el tamaño de la fuente */
-            color: #28a745;
-            margin-bottom: 20px;
-            text-align: center;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%); /* Centra el mensaje en la pantalla */
-            animation: fadeOut 3s forwards;
-        }
+        .welcome-container {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: fadeOut 3s forwards;
+}
+
+.welcome-message {
+    font-size: 4.5em;
+    color: #28a745;
+    margin-bottom: 10px;
+}
+
+.welcome-image {
+    width: 150px;
+    height: auto;
+}
+
+/* Animación para desaparecer */
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; display: none; }
+}
 
         .cards {
             display: grid;
@@ -221,7 +235,6 @@
             .nav {
                 display: flex;
                 justify-content: center; /* Centra los enlaces de navegación */
-                flex-wrap: wrap;
                 gap: 10px;
                 margin-top: 15px; /* Espacio entre el título y los enlaces */
                 width: 100%;
@@ -270,7 +283,10 @@
     </div>
 
     <div class="main-container">
-        <h2 class="welcome-message">Juega con ventaja</h2>
+        <div class="welcome-container">
+            <h2 class="welcome-message">Juega con ventaja</h2>
+            <img class="welcome-image" src="https://i.imgur.com/lrDksOx.png">
+        </div>
         <div class="cards">
             <div class="card">
                 <a href="ruleta.html">
@@ -302,7 +318,7 @@
                 </a>
             </div>
             <div class="card">
-                <a href="adeportivas.html">
+                <a href="apuestas.html">
                     <img src="https://i.imgur.com/A3amnU6.png" alt="Icono Tarjeta 3">
                     <p>Apuestas Deportivas</p>
                     <span>Conoce las mejores apuestas deportivas</span>
@@ -324,8 +340,8 @@
 
     <script>
         setTimeout(function() {
-            document.querySelector('.welcome-message').style.display = 'none';
-        }, 3000);
+            document.querySelector('.welcome-container').style.display = 'none';
+        }, 4000);
     </script>
 </body>
 </html>
