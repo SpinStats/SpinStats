@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <link rel="icon" href="https://i.imgur.com/EESckqO.png" type="image/png">
 
+    
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -59,6 +60,7 @@
         .nav a:hover {
             color: #28a745;
         }
+
         .options-container {
             text-align: center;
             margin-top: 20px;
@@ -74,6 +76,7 @@
             border-radius: 5px;
             transition: background-color 0.3s, color 0.3s;
         }
+
         .options-container a:hover {
             background-color: #28a745;
             color: white;
@@ -179,6 +182,7 @@
             text-align: center;
             color: #28a745;
         }
+
         .footer {
             background: #111;
             padding: 20px;
@@ -233,7 +237,7 @@
             .nav a {
                 font-size: 0.9em; /* Reducir el tamaño de las opciones */
             }
-            
+
             .cards {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -267,11 +271,28 @@
                 font-size: 0.9em;
                 margin-top: 10px;
             }
+
             .footer {
                 font-size: 0.8em; /* Reducir el tamaño del texto del pie de página */
             }
 
+            /* Hacer los botones más pequeños */
+            .options-container a {
+                font-size: 20px;  /* Texto más pequeño */
+                padding: 6px 12px;  /* Menos padding */
+                margin: 4px;  /* Reducir el margen entre los botones */
+                width: auto;  /* No expandir los botones */
+                height: 25px;  /* Establecer altura fija para que todos sean iguales */
+            }
 
+            /* Alinear los botones a la misma altura */
+            .options-container {
+                display: flex;
+                flex-direction: row;  /* Alinear los botones en una fila */
+                justify-content: center;  /* Centrar los botones */
+                align-items: center;  /* Asegurar que todos los botones estén a la misma altura */
+                gap: 8px;  /* Espaciado entre los botones */
+            }
         }
 
         @keyframes fadeIn {
