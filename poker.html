@@ -191,45 +191,58 @@
             font-size: 1.1em;  /* Un tamaño más pequeño para que quepa mejor */
             color: #fff;
     }
+    .language-selector {
+            background-color: #333;
+            color: white;
+            border: 1px solid #28a745;
+            padding: 8px;
+            font-size: 1em;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .language-selector:hover {
+            background-color: #28a745;
+            color: white;
+        }
             /* Ajustes responsivos */
 /* Ajustes responsivos */
 /* Ajustes responsivos */
 @media (max-width: 768px) {
     .header {
-        display: flex;
-        flex-direction: column; /* Coloca los elementos en una columna */
-        align-items: center; /* Centra el contenido */
-        justify-content: flex-start;
-        padding: 20px 0;
-    }
+                display: flex;
+                flex-direction: column; /* Coloca los elementos en una columna */
+                align-items: center; /* Centra el contenido */
+                justify-content: flex-start;
+                padding: 20px 0;
+            }
 
-    .header img {
-        position: absolute;
-        top: 15px;
-        left: 20px;
-        width: 50px;
-        height: 50px;
-    }
+            .header img {
+                position: absolute;
+                top: 15px;
+                left: 20px;
+                width: 50px;
+                height: 50px;
+            }
 
-    .header p {
-        font-size: 1.5em;
-        color: #28a745;
-        margin: 0;
-        text-align: center;
-    }
+            .header p {
+                font-size: 1.5em;
+                color: #28a745;
+                margin: 0;
+                text-align: center;
+            }
 
-    .nav {
-        display: flex;
-        justify-content: center; /* Centra los enlaces de navegación */
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 15px; /* Espacio entre el título y los enlaces */
-        width: 100%;
-    }
+            .nav {
+                display: flex;
+                justify-content: center; /* Centra los enlaces de navegación */
+                gap: 10px;
+                margin-top: 15px; /* Espacio entre el título y los enlaces */
+                width: 100%;
+            }
 
-    .nav a {
-        font-size: 0.9em; /* Reducir el tamaño de las opciones */
-    }
+            .nav a {
+                font-size: 0.9em; /* Reducir el tamaño de las opciones */
+            }
 
     .cards {
         margin-top: 20px;
@@ -336,7 +349,10 @@
             <a href="estrategias.html">Estrategias</a>
         </nav>
     </div>
-
+    <select id="language" class="language-selector" onchange="changeLanguage(this.value)">
+        <option value="es">Español</option>
+        <option value="en">English</option>
+    </select>
     <div class="container">
         <div>
             <h2>Poker</h2>
@@ -380,6 +396,72 @@
         &copy; 2025 <a href="TerminoCondiciones.html">Términos y Condiciones</a>
     </div>
     <script>
+        function changeLanguage(language) {
+            const elements = document.querySelectorAll('[data-key]');
+            const translations = {
+    "es": {
+        "home": "Inicio",
+        "roulette": "Ruleta",
+        "blackjack": "Blackjack",
+        "poker": "Poker",
+        "slots": "Slots",
+        "sports": "A. Deportivas",
+        "strategies": "Estrategias",
+        "roulette-title": "Ruleta",
+        "roulette-type": "Tipo de Ruleta:",
+        "roulette-european": "Europea (37 casillas)",
+        "roulette-american": "Americana (38 casillas)",
+        "bet-number": "Apostar a números específicos:",
+        "choose-numbers": "Elige los números (separados por comas):",
+        "bet-color": "Apostar a color:",
+        "red": "Rojo",
+        "black": "Negro",
+        "bet-even-odd": "Apostar a par/impar:",
+        "bet-row": "Apostar a fila:",
+        "row-1": "Primera Fila",
+        "row-2": "Segunda Fila",
+        "row-3": "Tercera Fila",
+        "bet-parity": "Apostar a paridad:"
+    },
+    "en": {
+        "home": "Home",
+        "roulette": "Roulette",
+        "blackjack": "Blackjack",
+        "poker": "Poker",
+        "slots": "Slots",
+        "sports": "Sports",
+        "strategies": "Strategies",
+        "roulette-title": "Roulette",
+        "roulette-type": "Roulette Type:",
+        "roulette-european": "European (37 slots)",
+        "roulette-american": "American (38 slots)",
+        "bet-number": "Bet on specific numbers:",
+        "choose-numbers": "Choose numbers (comma-separated):",
+        "bet-color": "Bet on color:",
+        "red": "Red",
+        "black": "Black",
+        "bet-even-odd": "Bet on even/odd:",
+        "bet-row": "Bet on row:",
+        "row-1": "First Row",
+        "row-2": "Second Row",
+        "row-3": "Third Row",
+        "bet-parity": "Bet on parity:"
+    }
+};
+
+            const selectedLang = translations[language];
+
+            elements.forEach(element => {
+                const key = element.getAttribute('data-key');
+                if (selectedLang[key]) {
+                    if (element.tagName.toLowerCase() === 'a') {
+                        element.textContent = selectedLang[key];
+                    } else {
+                        element.innerHTML = selectedLang[key];
+                    }
+                }
+            });
+        }
         function calculatePokerOdds() {
             const playerCards = document.getElementById("playerCards").value.split(',').map(c => c.trim());
             const communityCards = document.getElementById("communityCards").value.split(',').map(c => c.trim());

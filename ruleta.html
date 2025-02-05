@@ -82,7 +82,7 @@
 
         input[type="number"],
         input[type="text"],
-        select {
+        .container select {
             width: 100%;
             padding: 10px;
             margin: 8px 0 15px;
@@ -216,6 +216,20 @@
             visibility: visible;
             opacity: 1;
         }
+        .language-selector {
+            background-color: #333;
+            color: white;
+            border: 1px solid #28a745;
+            padding: 8px;
+            font-size: 1em;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .language-selector:hover {
+            background-color: #28a745;
+            color: white;
+        }
 
         @keyframes fadeIn {
             from {
@@ -289,77 +303,80 @@
 <body>
     <div class="header">
         <img src="https://i.imgur.com/lrDksOx.png" alt="Logo SpinStats">
-        <p>SpinStats</p>
+        <p data-key="appName">SpinStats</p>
         <nav class="nav">
-            <a href="index.html">Inicio</a>
-            <a href="ruleta.html">Ruleta</a>
-            <a href="blackjack.html">Blackjack</a>
-            <a href="poker.html">Poker</a>
-            <a href="slots.html">Slots</a>
-            <a href="adeportivas.html">A. Deportivas</a>
-            <a href="estrategias.html">Estrategias</a>
+            <a href="index.html" data-key="home">Inicio</a>
+            <a href="ruleta.html" data-key="roulette">Ruleta</a>
+            <a href="blackjack.html" data-key="blackjack">Blackjack</a>
+            <a href="poker.html" data-key="poker">Poker</a>
+            <a href="slots.html" data-key="slots">Slots</a>
+            <a href="adeportivas.html" data-key="sports">A. Deportivas</a>
+            <a href="estrategias.html" data-key="strategies">Estrategias</a>
         </nav>
     </div>
-
+    <select id="language" class="language-selector" onchange="changeLanguage(this.value)">
+        <option value="es">Español</option>
+        <option value="en">English</option>
+    </select>
     <div class="container">
-        <h2>Ruleta</h2>
+        <h2 data-key="rouletteTitle">Ruleta</h2>
 
         <!-- Selección del tipo de ruleta -->
-        <label for="tipoRuleta">Tipo de Ruleta:</label>
+        <label for="tipoRuleta" data-key="rouletteType">Tipo de Ruleta:</label>
         <select id="tipoRuleta">
-            <option value="1">Europea (37 casillas)</option>
-            <option value="2">Americana (38 casillas)</option>
+            <option value="1" data-key="europeanRoulette">Europea (37 casillas)</option>
+            <option value="2" data-key="americanRoulette">Americana (38 casillas)</option>
         </select>
 
         <!-- Apostar a números específicos -->
-        <label>Apostar a números específicos:</label>
+        <label data-key="betNumbers">Apostar a números específicos:</label>
         <input type="checkbox" id="apostarNumeros">
         <div id="numerosOpciones" style="display:none;">
-            <label for="numerosElegidos">Elige los números (separados por comas):</label>
+            <label for="numerosElegidos" data-key="chooseNumbers">Elige los números (separados por comas):</label>
             <input type="text" id="numerosElegidos" placeholder="Ejemplo: 5, 12, 18">
         </div>
         <br>
 
         <!-- Apostar a color -->
-        <label>Apostar a color:</label>
+        <label data-key="betColor">Apostar a color:</label>
         <input type="checkbox" id="apostarColor">
         <select id="colorApostado" style="display:none;">
-            <option value="rojo">Rojo</option>
-            <option value="negro">Negro</option>
+            <option value="rojo" data-key="red">Rojo</option>
+            <option value="negro" data-key="black">Negro</option>
         </select>
         <br>
 
         <!-- Apostar a par/impar -->
-        <label>Apostar a par/impar:</label>
+        <label data-key="betEvenOdd">Apostar a par/impar:</label>
         <input type="checkbox" id="apostarParImpar">
         <br>
 
         <!-- Apostar a fila -->
-        <label>Apostar a fila:</label>
+        <label data-key="betRow">Apostar a fila:</label>
         <input type="checkbox" id="apostarFila">
         <select id="filaApostada" style="display:none;">
-            <option value="1">Fila 1 (1-12)</option>
-            <option value="2">Fila 2 (13-24)</option>
-            <option value="3">Fila 3 (25-36)</option>
+            <option value="1" data-key="row1">Fila 1 (1-12)</option>
+            <option value="2" data-key="row2">Fila 2 (13-24)</option>
+            <option value="3" data-key="row3">Fila 3 (25-36)</option>
         </select>
         <br>
 
         <!-- Apostar a docena -->
-        <label>Apostar a docena:</label>
+        <label data-key="betDozen">Apostar a docena:</label>
         <input type="checkbox" id="apostarDocena">
         <select id="docenaApostada" style="display:none;">
-            <option value="1">Docena 1 (1-12)</option>
-            <option value="2">Docena 2 (13-24)</option>
-            <option value="3">Docena 3 (25-36)</option>
+            <option value="1" data-key="dozen1">Docena 1 (1-12)</option>
+            <option value="2" data-key="dozen2">Docena 2 (13-24)</option>
+            <option value="3" data-key="dozen3">Docena 3 (25-36)</option>
         </select>
         <br>
         
         <!-- Apostar a cantidad -->
-        <label for="cantidadApuesta">Cantidad a apostar (€):</label>
+        <label for="cantidadApuesta" data-key="betAmount">Cantidad a apostar (€):</label>
         <input type="number" id="cantidadApuesta" min="0.01" step="0.01">
         <br>
 
-        <button onclick="calcularProbabilidades()">Calcular Probabilidades y Ganancias</button>
+        <button onclick="calcularProbabilidades()" data-key="calculateButton">Calcular Probabilidades y Ganancias</button>
 
         <div class="result" id="resultado">
             <!-- Resultados se mostrarán aquí -->
@@ -367,10 +384,85 @@
     </div>
 
     <div class="footer">
-        &copy; 2025 <a href="TerminoCondiciones.html">Términos y Condiciones</a>
+        &copy; 2025 <a href="TerminoCondiciones.html" data-key="terms">Términos y Condiciones</a>
     </div>
 
     <script>
+        // Función para cambiar el idioma
+        const translations = {
+            es: {
+                appName: "SpinStats",
+                home: "Inicio",
+                roulette: "Ruleta",
+                blackjack: "Blackjack",
+                poker: "Poker",
+                slots: "Slots",
+                sports: "A. Deportivas",
+                strategies: "Estrategias",
+                rouletteTitle: "Ruleta",
+                rouletteType: "Tipo de Ruleta:",
+                europeanRoulette: "Europea (37 casillas)",
+                americanRoulette: "Americana (38 casillas)",
+                betNumbers: "Apostar a números específicos:",
+                chooseNumbers: "Elige los números (separados por comas):",
+                betColor: "Apostar a color:",
+                red: "Rojo",
+                black: "Negro",
+                betEvenOdd: "Apostar a par/impar:",
+                betRow: "Apostar a fila:",
+                row1: "Fila 1 (1-12)",
+                row2: "Fila 2 (13-24)",
+                row3: "Fila 3 (25-36)",
+                betDozen: "Apostar a docena:",
+                dozen1: "Docena 1 (1-12)",
+                dozen2: "Docena 2 (13-24)",
+                dozen3: "Docena 3 (25-36)",
+                betAmount: "Cantidad a apostar (€):",
+                calculateButton: "Calcular Probabilidades y Ganancias",
+                terms: "Términos y Condiciones"
+            },
+            en: {
+                appName: "SpinStats",
+                home: "Home",
+                roulette: "Roulette",
+                blackjack: "Blackjack",
+                poker: "Poker",
+                slots: "Slots",
+                sports: "Sports",
+                strategies: "Strategies",
+                rouletteTitle: "Roulette",
+                rouletteType: "Roulette Type:",
+                europeanRoulette: "European (37 slots)",
+                americanRoulette: "American (38 slots)",
+                betNumbers: "Bet on specific numbers:",
+                chooseNumbers: "Choose numbers (separated by commas):",
+                betColor: "Bet on color:",
+                red: "Red",
+                black: "Black",
+                betEvenOdd: "Bet on even/odd:",
+                betRow: "Bet on row:",
+                row1: "Row 1 (1-12)",
+                row2: "Row 2 (13-24)",
+                row3: "Row 3 (25-36)",
+                betDozen: "Bet on dozen:",
+                dozen1: "Dozen 1 (1-12)",
+                dozen2: "Dozen 2 (13-24)",
+                dozen3: "Dozen 3 (25-36)",
+                betAmount: "Amount to bet (€):",
+                calculateButton: "Calculate Probabilities and Winnings",
+                terms: "Terms and Conditions"
+            }
+        };
+
+        function changeLanguage(language) {
+            const elements = document.querySelectorAll('[data-key]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-key');
+                if (translations[language] && translations[language][key]) {
+                    element.textContent = translations[language][key];
+                }
+            });
+        }
         document.addEventListener('DOMContentLoaded', (event) => {
             document.getElementById("apostarNumeros").addEventListener('change', function () {
                 document.getElementById("numerosOpciones").style.display = this.checked ? 'block' : 'none';

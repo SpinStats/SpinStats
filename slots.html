@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <link rel="icon" href="https://i.imgur.com/EESckqO.png" type="image/png">
-
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -16,12 +15,6 @@
             padding: 0;
             color: white;
         }
-        .header p {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            font-size: 1.5em;
-            color: #28a745;
-        }
 
         .header {
             background-color: #111;
@@ -29,6 +22,7 @@
             display: flex;
             align-items: center;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            flex-wrap: wrap;
         }
 
         .header img {
@@ -38,10 +32,17 @@
             margin-right: 15px;
         }
 
+        .header p {
+            font-size: 1.5em;
+            color: #28a745;
+            margin: 0;
+        }
+
         .nav {
             display: flex;
             gap: 15px;
             margin-left: auto;
+            flex-wrap: wrap;
         }
 
         .nav a {
@@ -55,17 +56,14 @@
             color: #28a745;
         }
 
-        .container {
-            margin: 50px auto;
-            padding: 30px;
-            background: #222;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-            width: 80%;
-            max-width: 600px;
-            text-align: center;
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px;
+            margin-top: 30px;
         }
-
         h2 {
             text-align: center;
             font-size: 2.5em;
@@ -73,110 +71,150 @@
             color: #28a745;
         }
 
-        label {
-            display: inline-block;
-            margin-right: 10px;
-            color: #ddd;
-            font-size: 1.1em;
-            vertical-align: middle;
-        }
-
-        input[type="number"],
-        input[type="text"],
-        select {
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0 15px;
-            border-radius: 8px;
-            border: 1px solid #444;
-            background: #333;
-            color: white;
-            font-size: 1em;
-        }
-
-        input[type="checkbox"] {
-            width: auto;
-            height: 20px;
-            margin-left: 10px;
-            vertical-align: middle;
-            display: inline-block;
-        }
-
-        input[type="checkbox"] + label {
-            position: relative;
-            padding-left: 30px;
-            cursor: pointer;
-            font-size: 1.1em;
-            color: #ddd;
-            vertical-align: middle;
-        }
-
-        input[type="checkbox"]:checked + label:before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 20px;
-            height: 20px;
-            background-color: #28a745;
-            border-radius: 5px;
-        }
-
-        input[type="checkbox"]:checked + label:after {
-            content: '';
-            position: absolute;
-            left: 5px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 10px;
-            height: 10px;
-            background-color: white;
-            border-radius: 50%;
-        }
-
-        button {
-            background: linear-gradient(to right, #28a745, #218838);
-            color: white;
-            font-size: 1.1em;
-            font-weight: bold;
-            border: none;
-            border-radius: 8px;
-            padding: 12px 20px;
-            width: 100%;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.2s;
-        }
-
-        button:hover {
-            background: linear-gradient(to right, #218838, #28a745);
-            transform: translateY(-2px);
-        }
-
-        .result {
-            margin-top: 20px;
-            background: #111;
-            padding: 20px;
-            border-radius: 10px;
+        .welcome-container {
             text-align: center;
-            color: #fff;
-            animation: fadeIn 0.5s;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: fadeOut 3s forwards;
         }
 
-        .result p {
-            margin: 10px 0;
-            font-size: 1.2em;
-            font-weight: bold;
+        .welcome-message {
+            font-size: 4.5em;
             color: #28a745;
+            margin-bottom: 10px;
+        }
+
+        .welcome-image {
+            width: 150px;
+            height: auto;
+        }
+
+        .language-selector {
+            background-color: #333;
+            color: white;
+            border: 1px solid #28a745;
+            padding: 8px;
+            font-size: 1em;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .language-selector:hover {
+            background-color: #28a745;
+            color: white;
+        }
+
+        /* Animación para desaparecer */
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            100% { opacity: 0; display: none; }
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width:1300px;
+            margin-top: 20px;
+            opacity: 0;
+            animation: showCards 1s 3s forwards;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            height: 350px;
+            width: 175px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            color: white;
+            font-size: 1.2em;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+            padding: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 255, 255, 0.7);
+        }
+
+        .card a {
+            text-decoration: none;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100%;
+        }
+
+        .card img {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            margin: 5px 0;
+            font-size: 1.2em;
+        }
+
+        .card span {
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .card:nth-child(1) { animation-delay: 3.2s; }
+        .card:nth-child(2) { animation-delay: 3.4s; }
+        .card:nth-child(3) { animation-delay: 3.6s; }
+        .card:nth-child(4) { animation-delay: 3.8s; }
+        .card:nth-child(5) { animation-delay: 4s; }
+        .card:nth-child(6) { animation-delay: 4.2s; }
+
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            100% { opacity: 0; display: none; }
+        }
+
+        @keyframes showCards {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .footer {
             background: #111;
-            padding: 10px;
+            padding: 20px;
             text-align: center;
             color: #666;
             font-size: 0.9em;
-            margin-top: 30px;
+            margin-top: 150px;
             border-top: 2px solid #222;
         }
 
@@ -189,148 +227,157 @@
             text-decoration: underline;
         }
 
-        .tooltip {
-            position: relative;
-            cursor: pointer;
-            font-size: 1.2em;
-            color: #28a745;
-        }
-
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 200px;
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -100px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
+        /* Ajustes responsivos */
+        @media (max-width: 768px) {
+            .header {
+                display: flex;
+                flex-direction: column; /* Coloca los elementos en una columna */
+                align-items: center; /* Centra el contenido */
+                justify-content: flex-start;
+                padding: 20px 0;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+
+            .header img {
+                position: absolute;
+                top: 15px;
+                left: 20px;
+                width: 50px;
+                height: 50px;
+            }
+
+            .header p {
+                font-size: 1.5em;
+                color: #28a745;
+                margin: 0;
+                text-align: center;
+            }
+
+            .nav {
+                display: flex;
+                justify-content: center; /* Centra los enlaces de navegación */
+                gap: 10px;
+                margin-top: 15px; /* Espacio entre el título y los enlaces */
+                width: 100%;
+            }
+
+            .nav a {
+                font-size: 0.9em; /* Reducir el tamaño de las opciones */
+            }
+
+            .cards {
+                margin-top: 20px;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                margin-right: 20px;
+            }
+
+            .card {
+                height: auto;
+                padding: 15px;
+                width: 150px;
+            }
+
+            .card img {
+                width: 100px;
+                height: 100px;
+            }
+
+            .footer {
+                font-size: 0.8em; /* Reducir el tamaño del texto del pie de página */
             }
         }
-                /* Ajustes responsivos */
-                @media (max-width: 768px) {
-    .header {
-        display: flex;
-        flex-direction: column; /* Coloca los elementos en una columna */
-        align-items: center; /* Centra el contenido */
-        justify-content: flex-start;
-        padding: 20px 0;
-    }
-
-    .header img {
-        position: absolute;
-        top: 15px;
-        left: 20px;
-        width: 50px;
-        height: 50px;
-    }
-
-    .header p {
-        font-size: 1.5em;
-        color: #28a745;
-        margin: 0;
-        text-align: center;
-    }
-
-    .nav {
-        display: flex;
-        justify-content: center; /* Centra los enlaces de navegación */
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 15px; /* Espacio entre el título y los enlaces */
-        width: 100%;
-    }
-
-    .nav a {
-        font-size: 0.9em; /* Reducir el tamaño de las opciones */
-    }
-
-    .cards {
-        margin-top: 20px;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    }
-
-    .card {
-        height: auto;
-        padding: 15px;
-    }
-
-    .card img {
-        width: 100px;
-        height: 100px;
-    }
-
-    .footer {
-        font-size: 0.8em; /* Reducir el tamaño del texto del pie de página */
-    }
-}
     </style>
 </head>
 <body>
     <div class="header">
         <img src="https://i.imgur.com/lrDksOx.png" alt="Logo SpinStats">
-        <p href="index.html">SpinStats</p>
+        <p data-key="spinstats">SpinStats</p>
         <nav class="nav">
-            <a href="index.html">Inicio</a>
-            <a href="ruleta.html">Ruleta</a>
-            <a href="blackjack.html">Blackjack</a>
-            <a href="poker.html">Poker</a>
-            <a href="slots.html">Slots</a>
-            <a href="adeportivas.html">A. Deportivas</a>
-            <a href="estrategias.html">Estrategias</a>
+            <a href="index.html" data-key="home">Inicio</a>
+            <a href="ruleta.html" data-key="roulette">Ruleta</a>
+            <a href="blackjack.html" data-key="blackjack">Blackjack</a>
+            <a href="poker.html" data-key="poker">Poker</a>
+            <a href="slots.html" data-key="slots">Slots</a>
+            <a href="adeportivas.html" data-key="sports">A. Deportivas</a>
+            <a href="estrategias.html" data-key="strategies">Estrategias</a>
         </nav>
     </div>
-    <h2>Proximamente disponible...</h2>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    </div>
+        <!-- Language Selector -->
+    <select id="language" class="language-selector" onchange="changeLanguage(this.value)">
+        <option value="es">Español</option>
+        <option value="en">English</option>
+    </select>
+    <h2 data-key="coming-soon">Proximamente disponible...</h2>
 
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <div class="footer">
-        &copy; 2025 <a href="TerminoCondiciones.html">Términos y Condiciones</a>
+        &copy; 2025 <a href="TerminoCondiciones.html" data-key="terms">Términos y Condiciones</a>
     </div>
 
+    <script>
+        // Objeto de traducciones
+        const translations = {
+            "es": {
+                "spinstats": "SpinStats",
+                "home": "Inicio",
+                "roulette": "Ruleta",
+                "blackjack": "Blackjack",
+                "poker": "Poker",
+                "slots": "Slots",
+                "sports": "A. Deportivas",
+                "strategies": "Estrategias",
+                "coming-soon": "Proximamente disponible...",
+                "terms": "Términos y Condiciones"
+            },
+            "en": {
+                "spinstats": "SpinStats",
+                "home": "Home",
+                "roulette": "Roulette",
+                "blackjack": "Blackjack",
+                "poker": "Poker",
+                "slots": "Slots",
+                "sports": "Sports",
+                "strategies": "Strategies",
+                "coming-soon": "Coming Soon...",
+                "terms": "Terms and Conditions"
+            }
+        };
+
+        // Función para cambiar el idioma
+        function changeLanguage(lang) {
+            // Cambiar los textos de los elementos con 'data-key'
+            document.querySelectorAll("[data-key]").forEach(el => {
+                const key = el.getAttribute("data-key");
+                if (translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+        }
+    </script>
 </body>
 </html>
