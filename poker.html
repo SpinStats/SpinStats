@@ -338,29 +338,32 @@
 <body>
     <div class="header">
         <img src="https://i.imgur.com/YDar1fs.png" alt="Logo SpinStats">
-        <p>SpinStats</p>
+        <p data-key="title">SpinStats</p>
         <nav class="nav">
-            <a href="index.html">Inicio</a>
-            <a href="ruleta.html">Ruleta</a>
-            <a href="blackjack.html">Blackjack</a>
-            <a href="poker.html">Poker</a>
-            <a href="slots.html">Slots</a>
-            <a href="adeportivas.html">A. Deportivas</a>
-            <a href="estrategias.html">Estrategias</a>
+            <a href="index.html" data-key="home">Inicio</a>
+            <a href="ruleta.html" data-key="roulette">Ruleta</a>
+            <a href="blackjack.html" data-key="blackjack">Blackjack</a>
+            <a href="poker.html" data-key="poker">Poker</a>
+            <a href="slots.html" data-key="slots">Slots</a>
+            <a href="adeportivas.html" data-key="sports">A. Deportivas</a>
+            <a href="estrategias.html" data-key="strategies">Estrategias</a>
         </nav>
     </div>
+
+    <!-- Language Selector -->
     <select id="language" class="language-selector" onchange="changeLanguage(this.value)">
         <option value="es">Español</option>
         <option value="en">English</option>
     </select>
+
     <div class="container">
         <div>
-            <h2>Poker</h2>
+            <h2 data-key="poker-title">Poker</h2>
 
-            <label for="playerCards">Tus cartas (separadas por comas):</label>
+            <label for="playerCards" data-key="label-playerCards">Tus cartas (separadas por comas):</label>
             <input type="text" id="playerCards" placeholder="Ejemplo: As, Ks">
 
-            <label for="communityCards">Cartas en la mesa (separadas por comas):</label>
+            <label for="communityCards" data-key="label-communityCards">Cartas en la mesa (separadas por comas):</label>
             <input type="text" id="communityCards" placeholder="Ejemplo: 10s, 8d, 3h">
 
             <button onclick="calculatePokerOdds()">Calcular Probabilidades</button>
@@ -370,22 +373,23 @@
 
         <!-- Tarjeta con los palos de la baraja -->
     </div>
+
     <div class="right-card">
         <div class="card-item">
             <img src="https://i.imgur.com/FZecbFA.png" alt="Corazones" class="card-img">
-            <span class="card-text">Corazones(h)</span>
+            <span class="card-text" data-key="hearts">Corazones(h)</span>
         </div>
         <div class="card-item">
             <img src="https://i.imgur.com/uJtFUam.png" alt="Trébol" class="card-img">
-            <span class="card-text">Trébol(c)</span>
+            <span class="card-text" data-key="clubs">Trébol(c)</span>
         </div>
         <div class="card-item">
             <img src="https://i.imgur.com/TBHt15k.png" alt="Diamantes" class="card-img">
-            <span class="card-text">Diamantes(d)</span>
+            <span class="card-text" data-key="diamonds">Diamantes(d)</span>
         </div>
         <div class="card-item">
             <img src="https://i.imgur.com/I6rtXDq.png" alt="Picas" class="card-img">
-            <span class="card-text">Picas(s)</span>
+            <span class="card-text" data-key="spades">Picas(s)</span>
         </div>
     </div>
     <br>
@@ -393,89 +397,84 @@
     <br>
     <br>
     <div class="footer">
-        &copy; 2025 <a href="TerminoCondiciones.html">Términos y Condiciones</a>
+        &copy; 2025 <a href="TerminoCondiciones.html" data-key="terms">Términos y Condiciones</a>
     </div>
+
     <script>
+        const translations = {
+            "es": {
+                "title": "SpinStats",
+                "home": "Inicio",
+                "roulette": "Ruleta",
+                "blackjack": "Blackjack",
+                "poker": "Poker",
+                "slots": "Slots",
+                "sports": "A. Deportivas",
+                "strategies": "Estrategias",
+                "poker-title": "Poker",
+                "label-playerCards": "Tus cartas (separadas por comas):",
+                "label-communityCards": "Cartas en la mesa (separadas por comas):",
+                "hearts": "Corazones(h)",
+                "clubs": "Trébol(c)",
+                "diamonds": "Diamantes(d)",
+                "spades": "Picas(s)",
+                "terms": "Términos y Condiciones",
+                "win-probability": "Probabilidad de ganar",
+                "tie-probability": "Probabilidad de empate",
+                "lose-probability": "Probabilidad de perder",
+                "invalid-cards": "Las cartas ingresadas no son válidas. Por favor, verifique las cartas."
+            },
+            "en": {
+                "title": "SpinStats",
+                "home": "Home",
+                "roulette": "Roulette",
+                "blackjack": "Blackjack",
+                "poker": "Poker",
+                "slots": "Slots",
+                "sports": "Sports",
+                "strategies": "Strategies",
+                "poker-title": "Poker",
+                "label-playerCards": "Your cards (comma-separated):",
+                "label-communityCards": "Community cards (comma-separated):",
+                "hearts": "Hearts(h)",
+                "clubs": "Clubs(c)",
+                "diamonds": "Diamonds(d)",
+                "spades": "Spades(s)",
+                "terms": "Terms and Conditions",
+                "win-probability": "Win Probability",
+                "tie-probability": "Tie Probability",
+                "lose-probability": "Lose Probability",
+                "invalid-cards": "The cards entered are invalid. Please check the cards."
+            }
+        };
+    
+        let currentLanguage = "es";
+    
         function changeLanguage(language) {
-            const elements = document.querySelectorAll('[data-key]');
-            const translations = {
-    "es": {
-        "home": "Inicio",
-        "roulette": "Ruleta",
-        "blackjack": "Blackjack",
-        "poker": "Poker",
-        "slots": "Slots",
-        "sports": "A. Deportivas",
-        "strategies": "Estrategias",
-        "roulette-title": "Ruleta",
-        "roulette-type": "Tipo de Ruleta:",
-        "roulette-european": "Europea (37 casillas)",
-        "roulette-american": "Americana (38 casillas)",
-        "bet-number": "Apostar a números específicos:",
-        "choose-numbers": "Elige los números (separados por comas):",
-        "bet-color": "Apostar a color:",
-        "red": "Rojo",
-        "black": "Negro",
-        "bet-even-odd": "Apostar a par/impar:",
-        "bet-row": "Apostar a fila:",
-        "row-1": "Primera Fila",
-        "row-2": "Segunda Fila",
-        "row-3": "Tercera Fila",
-        "bet-parity": "Apostar a paridad:"
-    },
-    "en": {
-        "home": "Home",
-        "roulette": "Roulette",
-        "blackjack": "Blackjack",
-        "poker": "Poker",
-        "slots": "Slots",
-        "sports": "Sports",
-        "strategies": "Strategies",
-        "roulette-title": "Roulette",
-        "roulette-type": "Roulette Type:",
-        "roulette-european": "European (37 slots)",
-        "roulette-american": "American (38 slots)",
-        "bet-number": "Bet on specific numbers:",
-        "choose-numbers": "Choose numbers (comma-separated):",
-        "bet-color": "Bet on color:",
-        "red": "Red",
-        "black": "Black",
-        "bet-even-odd": "Bet on even/odd:",
-        "bet-row": "Bet on row:",
-        "row-1": "First Row",
-        "row-2": "Second Row",
-        "row-3": "Third Row",
-        "bet-parity": "Bet on parity:"
-    }
-};
-
-            const selectedLang = translations[language];
-
-            elements.forEach(element => {
-                const key = element.getAttribute('data-key');
-                if (selectedLang[key]) {
-                    if (element.tagName.toLowerCase() === 'a') {
-                        element.textContent = selectedLang[key];
-                    } else {
-                        element.innerHTML = selectedLang[key];
-                    }
+            currentLanguage = language;
+            const elements = document.querySelectorAll("[data-key]");
+            elements.forEach((element) => {
+                const key = element.getAttribute("data-key");
+                if (translations[language][key]) {
+                    element.textContent = translations[language][key];
                 }
             });
         }
+    
         function calculatePokerOdds() {
             const playerCards = document.getElementById("playerCards").value.split(',').map(c => c.trim());
             const communityCards = document.getElementById("communityCards").value.split(',').map(c => c.trim());
     
             if (!validateCards(playerCards, communityCards)) {
-                alert("Por favor, asegúrate de ingresar cartas válidas y únicas en el formato correcto (e.g., 'As, Kd').");
+                alert(translations[currentLanguage]["invalid-cards"]);
                 return;
             }
     
             const result = simulatePokerOdds(playerCards, communityCards);
             document.getElementById("result").innerHTML =
-                `<p>Probabilidad de ganar: ${result.win.toFixed(2)}%</p>
-                <p>Probabilidad de empate: ${result.tie.toFixed(2)}%</p>
-                <p>Probabilidad de perder: ${result.lose.toFixed(2)}%</p>`;
+                `<p>${translations[currentLanguage]["win-probability"]}: ${result.win.toFixed(2)}%</p>
+                <p>${translations[currentLanguage]["tie-probability"]}: ${result.tie.toFixed(2)}%</p>
+                <p>${translations[currentLanguage]["lose-probability"]}: ${result.lose.toFixed(2)}%</p>`;
         }
     
         function validateCards(playerCards, communityCards) {
@@ -489,13 +488,13 @@
                 const suit = card.slice(-1);
     
                 if (!validValues.includes(value) || !validSuits.includes(suit) || cardSet.has(card)) {
-                    return false; // Carta inválida o duplicada
+                    return false;
                 }
     
                 cardSet.add(card);
             }
     
-            return playerCards.length === 2 && communityCards.length <= 5; // Validar cantidad de cartas
+            return playerCards.length === 2 && communityCards.length <= 5;
         }
     
         function simulatePokerOdds(playerCards, communityCards) {
@@ -509,18 +508,15 @@
                 const simulatedDeck = [...deck];
                 shuffle(simulatedDeck);
     
-                // Completar la mesa con cartas del mazo
                 const fullBoard = [...communityCards, ...simulatedDeck.slice(0, 5 - communityCards.length)];
                 const opponentHand = simulatedDeck.slice(5 - communityCards.length, 7 - communityCards.length);
     
-                // Evaluar las manos
                 const playerHand = [...playerCards, ...fullBoard];
                 const opponentFullHand = [...opponentHand, ...fullBoard];
     
                 const playerRank = evaluateHand(playerHand);
                 const opponentRank = evaluateHand(opponentFullHand);
     
-                // Comparar las manos y contar las victorias, empates o pérdidas
                 if (playerRank > opponentRank) {
                     win++;
                 } else if (playerRank === opponentRank) {
@@ -573,15 +569,15 @@
             const isFlush = Math.max(...suitCounts) >= 5;
             const isStraight = checkStraight(values);
     
-            if (isFlush && isStraight) return 9; // Escalera de color
-            if (valueCounts[0] === 4) return 8;  // Póker
-            if (valueCounts[0] === 3 && valueCounts[1] === 2) return 7; // Full House
-            if (isFlush) return 6; // Color
-            if (isStraight) return 5; // Escalera
-            if (valueCounts[0] === 3) return 4; // Trío
-            if (valueCounts[0] === 2 && valueCounts[1] === 2) return 3; // Doble pareja
-            if (valueCounts[0] === 2) return 2; // Pareja
-            return 1; // Carta alta
+            if (isFlush && isStraight) return 9;
+            if (valueCounts[0] === 4) return 8;
+            if (valueCounts[0] === 3 && valueCounts[1] === 2) return 7;
+            if (isFlush) return 6;
+            if (isStraight) return 5;
+            if (valueCounts[0] === 3) return 4;
+            if (valueCounts[0] === 2 && valueCounts[1] === 2) return 3;
+            if (valueCounts[0] === 2) return 2;
+            return 1;
         }
     
         function countValues(values) {
@@ -597,18 +593,10 @@
         }
     
         function checkStraight(values) {
-            const uniqueValues = Array.from(new Set(values));
-            const sortedValues = uniqueValues.map(v => ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'].indexOf(v)).sort((a, b) => a - b);
-            for (let i = 0; i < sortedValues.length - 4; i++) {
-                if (sortedValues[i] === sortedValues[i + 1] - 1 && sortedValues[i + 1] === sortedValues[i + 2] - 1 &&
-                    sortedValues[i + 2] === sortedValues[i + 3] - 1 && sortedValues[i + 3] === sortedValues[i + 4] - 1) {
-                    return true;
-                }
-            }
-            return false;
+            const sortedValues = values.map(v => "23456789TJQKA".indexOf(v)).sort((a, b) => a - b);
+            return sortedValues.some((_, i, arr) => arr[i] + 4 === arr[i + 4]);
         }
-    </script>    
-    
-      
+    </script>
+     
 </body>
 </html>
