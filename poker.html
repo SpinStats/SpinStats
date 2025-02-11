@@ -448,18 +448,33 @@
             }
         };
     
-        let currentLanguage = "es";
+                // Cargar el idioma guardado desde localStorage o usar el idioma por defecto 'es'
+                let currentLanguage = localStorage.getItem('language') || 'en';
     
-        function changeLanguage(language) {
-            currentLanguage = language;
-            const elements = document.querySelectorAll("[data-key]");
-            elements.forEach((element) => {
-                const key = element.getAttribute("data-key");
-                if (translations[language][key]) {
-                    element.textContent = translations[language][key];
-                }
-            });
-        }
+    // Función para cambiar el idioma
+    function changeLanguage(language) {
+        currentLanguage = language;
+        localStorage.setItem('language', language); // Guardar el idioma seleccionado en localStorage
+        applyTranslations(language);
+    }
+
+    // Función para aplicar las traducciones
+    function applyTranslations(language) {
+        const elements = document.querySelectorAll("[data-key]");
+        elements.forEach((element) => {
+            const key = element.getAttribute("data-key");
+            if (translations[language][key]) {
+                element.textContent = translations[language][key];
+            }
+        });
+    }
+
+    // Aplicar el idioma cargado desde localStorage al cargar la página
+    document.addEventListener('DOMContentLoaded', () => {
+        applyTranslations(currentLanguage);
+        // Asegúrate de seleccionar el idioma en el selector (si tienes un selector para el idioma)
+        document.getElementById('language').value = currentLanguage;
+    });
     
         function calculatePokerOdds() {
             const playerCards = document.getElementById("playerCards").value.split(',').map(c => c.trim());

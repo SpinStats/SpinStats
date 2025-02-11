@@ -306,7 +306,7 @@
     </select>
     <div class="main-container">
         <div class="welcome-container">
-            <h2 class="welcome-message">Juega con ventaja</h2>
+            <h2 class="welcome-message"  data-key="welcome">Juega con ventaja</h2>
             <img class="welcome-image" src="https://i.imgur.com/6x2MhoC.png">
         </div>
         <div class="cards">
@@ -361,60 +361,62 @@
     </div>
 
     <script>
-        setTimeout(function() {
-            document.querySelector('.welcome-container').style.display = 'none';
-        }, 4000);
-
-        const translations = {
-            "es": {
-                "home": "Inicio",
-                "roulette": "Ruleta",
-                "blackjack": "Blackjack",
-                "poker": "Poker",
-                "slots": "Slots",
-                "sports": "A. Deportivas",
-                "strategies": "Estrategias",
-                "roulette-description": "Analiza tus apuestas en la ruleta",
-                "blackjack-description": "Analiza tus apuestas en el blackjack",
-                "poker-description": "Analiza tus manos de poker",
-                "slots-description": "Juega slots con dinero real o ficticio",
-                "sports-description": "Conoce las mejores apuestas deportivas",
-                "strategies-description": "Conoce las mejores estrategias"
-            },
-            "en": {
-                "home": "Home",
-                "roulette": "Roulette",
-                "blackjack": "Blackjack",
-                "poker": "Poker",
-                "slots": "Slots",
-                "sports": "Sports Betting",
-                "strategies": "Strategies",
-                "roulette-description": "Analyze your bets in roulette",
-                "blackjack-description": "Analyze your bets in blackjack",
-                "poker-description": "Analyze your poker hands",
-                "slots-description": "Play slots with real or fake money",
-                "sports-description": "Find the best sports betting tips",
-                "strategies-description": "Discover the best strategies"
-            }
-        };
+        // Traducir textos automáticamente al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLanguage = localStorage.getItem('language') || 'en'; // Si no hay idioma guardado, por defecto 'en'
+            applyTranslations(savedLanguage);
+            document.getElementById('language').value = savedLanguage; // Selecciona el idioma al cargar
+        });
 
         function changeLanguage(lang) {
-        // Traducir los textos de los elementos con data-key
-        document.querySelectorAll("[data-key]").forEach(el => {
-            const key = el.getAttribute("data-key");
-            if (translations[lang][key]) {
-                el.textContent = translations[lang][key];
-            }
-        });
+            localStorage.setItem('language', lang); // Guardar el idioma en localStorage
+            applyTranslations(lang); // Aplicar la traducción
+        }
 
-        // Traducir los textos de las clases asociadas a elementos (por ejemplo, 'home', 'roulette', etc.)
-        document.querySelectorAll("[data-class]").forEach(el => {
-            const classKey = el.getAttribute("data-class");
-            if (translations[lang][classKey]) {
-                el.textContent = translations[lang][classKey];
-            }
-        });
-    }
+        function applyTranslations(lang) {
+            const translations = {
+                "es": {
+                    "home": "Inicio",
+                    "roulette": "Ruleta",
+                    "blackjack": "Blackjack",
+                    "poker": "Poker",
+                    "slots": "Slots",
+                    "sports": "A. Deportivas",
+                    "strategies": "Estrategias",
+                    "welcome": "Juega con ventaja",
+                    "roulette-description": "Analiza tus apuestas en la ruleta",
+                    "blackjack-description": "Analiza tus apuestas en el blackjack",
+                    "poker-description": "Analiza tus manos de poker",
+                    "slots-description": "Juega slots con dinero real o ficticio",
+                    "sports-description": "Conoce las mejores apuestas deportivas",
+                    "strategies-description": "Conoce las mejores estrategias"
+                },
+                "en": {
+                    "home": "Home",
+                    "roulette": "Roulette",
+                    "blackjack": "Blackjack",
+                    "poker": "Poker",
+                    "slots": "Slots",
+                    "sports": "Sports",
+                    "strategies": "Strategies",
+                    "welcome": "Play with advantage",
+                    "roulette-description": "Analyze your bets in roulette",
+                    "blackjack-description": "Analyze your bets in blackjack",
+                    "poker-description": "Analyze your poker hands",
+                    "slots-description": "Play slots with real or fake money",
+                    "sports-description": "Find the best sports betting tips",
+                    "strategies-description": "Discover the best strategies"
+                }
+            };
+
+            // Traducir los textos de los elementos con data-key
+            document.querySelectorAll("[data-key]").forEach(el => {
+                const key = el.getAttribute("data-key");
+                if (translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+        }
     </script>
 </body>
 </html>

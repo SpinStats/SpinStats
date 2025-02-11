@@ -321,171 +321,173 @@
 <body>
     <div class="header">
         <img src="https://i.imgur.com/YDar1fs.png" alt="Logo SpinStats">
-        <p id="logo">SpinStats</p>
+        <p data-key="logo">SpinStats</p>
         <nav class="nav">
-            <a href="index.html" id="home-link">Inicio</a>
-            <a href="ruleta.html" id="roulette-link">Ruleta</a>
-            <a href="blackjack.html" id="blackjack-link">Blackjack</a>
-            <a href="poker.html" id="poker-link">Poker</a>
-            <a href="slots.html" id="slots-link">Slots</a>
-            <a href="adeportivas.html" id="sports-link">A. Deportivas</a>
-            <a href="estrategias.html" id="strategies-link">Estrategias</a>
+            <a href="index.html" data-key="home-link">Inicio</a>
+            <a href="ruleta.html" data-key="roulette-link">Ruleta</a>
+            <a href="blackjack.html" data-key="blackjack-link">Blackjack</a>
+            <a href="poker.html" data-key="poker-link">Poker</a>
+            <a href="slots.html" data-key="slots-link">Slots</a>
+            <a href="adeportivas.html" data-key="sports-link">A. Deportivas</a>
+            <a href="estrategias.html" data-key="strategies-link">Estrategias</a>
         </nav>
     </div>
+
     <select id="language" class="language-selector" onchange="changeLanguage(this.value)">
-        <option value="es" id="spanish">Español</option>
-        <option value="en" id="english">English</option>
+        <option value="es" data-key="spanish">Español</option>
+        <option value="en" data-key="english">English</option>
     </select>
 
     <div class="options-container">
-        <a href="#ruleta-title" id="roulette-option">Ruleta</a>
-        <a href="#blackjack-title" id="blackjack-option">Blackjack</a>
-        <a href="#poker-title" id="poker-option">Póker</a>
+        <a href="#ruleta-title" data-key="roulette-option">Ruleta</a>
+        <a href="#blackjack-title" data-key="blackjack-option">Blackjack</a>
+        <a href="#poker-title" data-key="poker-option">Póker</a>
     </div>
 
     <div class="main-container">
-        <h2 id="ruleta-title">Ruleta</h2>
+        <h2 data-key="ruleta-title">Ruleta</h2>
         <div class="cards">
             <div class="card">
-                <p id="james-bond-strategy">Estrategia James Bond</p>
-                <span id="james-bond-description">Divide las apuestas entre números altos, medios y el 0</span>
+                <p data-key="james-bond-strategy">Estrategia James Bond</p>
+                <span data-key="james-bond-description">Divide las apuestas entre números altos, medios y el 0</span>
                 <div class="details">
-                    <p id="james-bond-details">La estrategia James Bond consiste en dividir la apuesta de manera que cubra más de la mitad de la ruleta. Se apuesta una cantidad al 0, otra a los números altos y otra a los números medios. Ideal para quienes buscan una cobertura amplia.</p>
+                    <p data-key="james-bond-details">La estrategia James Bond consiste en dividir la apuesta de manera que cubra más de la mitad de la ruleta. Se apuesta una cantidad al 0, otra a los números altos y otra a los números medios. Ideal para quienes buscan una cobertura amplia.</p>
                 </div>
             </div>
             <div class="card">
-                <p id="martingale-strategy">Estrategia Martingala</p>
-                <span id="martingale-description">Duplica la apuesta tras cada pérdida hasta ganar</span>
+                <p data-key="martingale-strategy">Estrategia Martingala</p>
+                <span data-key="martingale-description">Duplica la apuesta tras cada pérdida hasta ganar</span>
                 <div class="details">
-                    <p id="martingale-details">La estrategia Martingala es una técnica de apuestas en la que duplicas tu apuesta después de cada pérdida, buscando recuperar todas las pérdidas cuando finalmente se gana una apuesta.</p>
+                    <p data-key="martingale-details">La estrategia Martingala es una técnica de apuestas en la que duplicas tu apuesta después de cada pérdida, buscando recuperar todas las pérdidas cuando finalmente se gana una apuesta.</p>
                 </div>
             </div>
             <div class="card">
-                <p id="fibonacci-strategy">Estrategia Fibonacci</p>
-                <span id="fibonacci-description">Aumenta la apuesta según la secuencia de Fibonacci tras perder</span>
+                <p data-key="fibonacci-strategy">Estrategia Fibonacci</p>
+                <span data-key="fibonacci-description">Aumenta la apuesta según la secuencia de Fibonacci tras perder</span>
                 <div class="details">
-                    <p id="fibonacci-details">La estrategia Fibonacci sigue la famosa secuencia matemática, donde cada número es la suma de los dos anteriores. Aumentas la apuesta según la secuencia después de perder, lo que minimiza las pérdidas a largo plazo.</p>
+                    <p data-key="fibonacci-details">La estrategia Fibonacci sigue la famosa secuencia matemática, donde cada número es la suma de los dos anteriores. Aumentas la apuesta según la secuencia después de perder, lo que minimiza las pérdidas a largo plazo.</p>
                 </div>
             </div>
             <div class="card">
-                <p id="dalembert-strategy">Estrategia D'Alembert</p>
-                <span id="dalembert-description">Aumenta o disminuye la apuesta de forma moderada</span>
+                <p data-key="dalembert-strategy">Estrategia D'Alembert</p>
+                <span data-key="dalembert-description">Aumenta o disminuye la apuesta de forma moderada</span>
                 <div class="details">
-                    <p id="dalembert-details">La estrategia D'Alembert se basa en aumentar la apuesta en una unidad tras una pérdida y disminuirla en una unidad tras una victoria. Se considera más equilibrada que la Martingala.</p>
+                    <p data-key="dalembert-details">La estrategia D'Alembert se basa en aumentar la apuesta en una unidad tras una pérdida y disminuirla en una unidad tras una victoria. Se considera más equilibrada que la Martingala.</p>
                 </div>
             </div>
             <div class="card">
-                <p id="labouchere-strategy">Estrategia Labouchere</p>
-                <span id="labouchere-description">Crea una secuencia y apuesta la suma de los extremos</span>
+                <p data-key="labouchere-strategy">Estrategia Labouchere</p>
+                <span data-key="labouchere-description">Crea una secuencia y apuesta la suma de los extremos</span>
                 <div class="details">
-                    <p id="labouchere-details">La estrategia Labouchere se basa en crear una secuencia de números, donde apuestas la suma de los extremos de la secuencia. Tras una victoria, se eliminan esos números; tras una pérdida, se añaden nuevos números al final.</p>
+                    <p data-key="labouchere-details">La estrategia Labouchere se basa en crear una secuencia de números, donde apuestas la suma de los extremos de la secuencia. Tras una victoria, se eliminan esos números; tras una pérdida, se añaden nuevos números al final.</p>
                 </div>
             </div>
             <div class="card">
-                <p id="column-bet-strategy">Estrategia de Apuestas en Columna</p>
-                <span id="column-bet-description">Apuesta a una columna específica para mayor probabilidad de acierto</span>
+                <p data-key="column-bet-strategy">Estrategia de Apuestas en Columna</p>
+                <span data-key="column-bet-description">Apuesta a una columna específica para mayor probabilidad de acierto</span>
                 <div class="details">
-                    <p id="column-bet-details">Esta estrategia se basa en apostar a una de las tres columnas de la ruleta. Al cubrir 12 números con una sola apuesta, tienes una mayor probabilidad de ganar, aunque con un pago más bajo.</p>
+                    <p data-key="column-bet-details">Esta estrategia se basa en apostar a una de las tres columnas de la ruleta. Al cubrir 12 números con una sola apuesta, tienes una mayor probabilidad de ganar, aunque con un pago más bajo.</p>
                 </div>
             </div>
         </div>
 
-        <h2 id="blackjack-title">Blackjack</h2>
+        <h2 data-key="blackjack-title">Blackjack</h2>
         <div class="cards">
             <div class="card">
-                <p id="basic-strategy">Estrategia Básica</p>
-                <span id="basic-description">Jugada óptima basada en la probabilidad matemática</span>
+                <p data-key="basic-strategy">Estrategia Básica</p>
+                <span data-key="basic-description">Jugada óptima basada en la probabilidad matemática</span>
                 <div class="details">
-                    <p id="basic-details">La estrategia básica de blackjack está basada en probabilidades matemáticas y proporciona la jugada más ventajosa según tu mano y la carta visible del crupier. Ejemplo: plantarse con 17 o más y pedir carta con 8 o menos.</p>
+                    <p data-key="basic-details">La estrategia básica de blackjack está basada en probabilidades matemáticas y proporciona la jugada más ventajosa según tu mano y la carta visible del crupier. Ejemplo: plantarse con 17 o más y pedir carta con 8 o menos.</p>
                 </div>
             </div>
             <div class="card">
-                <p id="card-counting-strategy">Conteo de Cartas</p>
-                <span id="card-counting-description">Contabiliza las cartas para predecir las probabilidades</span>
+                <p data-key="card-counting-strategy">Conteo de Cartas</p>
+                <span data-key="card-counting-description">Contabiliza las cartas para predecir las probabilidades</span>
                 <div class="details">
-                    <p id="card-counting-details">El conteo de cartas es una estrategia avanzada donde se sigue la cantidad de cartas altas y bajas en el mazo. Permite anticipar cuándo es más probable que salgan cartas favorables.</p>
+                    <p data-key="card-counting-details">El conteo de cartas es una estrategia avanzada donde se sigue la cantidad de cartas altas y bajas en el mazo. Permite anticipar cuándo es más probable que salgan cartas favorables.</p>
                 </div>
             </div>
             <div class="card">
-                <p id="hi-lo-strategy">Estrategia Hi-Lo</p>
-                <span id="hi-lo-description">Usa un sistema de conteo simple basado en +1 y -1</span>
+                <p data-key="hi-lo-strategy">Estrategia Hi-Lo</p>
+                <span data-key="hi-lo-description">Usa un sistema de conteo simple basado en +1 y -1</span>
                 <div class="details">
-                    <p id="hi-lo-details">La estrategia Hi-Lo es un sistema de conteo de cartas en el que se asignan valores a las cartas: +1 a las cartas bajas (2-6), 0 a las cartas medias (7-9) y -1 a las cartas altas (10-A). Esto permite hacer apuestas más informadas.</p>
+                    <p data-key="hi-lo-details">La estrategia Hi-Lo es un sistema de conteo de cartas en el que se asignan valores a las cartas: +1 a las cartas bajas (2-6), 0 a las cartas medias (7-9) y -1 a las cartas altas (10-A). Esto permite hacer apuestas más informadas.</p>
                 </div>
             </div>
             <div class="card">
-                <p id="bet-adjustment-strategy">Reajuste de Apuestas</p>
-                <span id="bet-adjustment-description">Varía las apuestas según la situación de la mano</span>
+                <p data-key="bet-adjustment-strategy">Reajuste de Apuestas</p>
+                <span data-key="bet-adjustment-description">Varía las apuestas según la situación de la mano</span>
                 <div class="details">
-                    <p id="bet-adjustment-details">Esta estrategia se basa en ajustar las apuestas dependiendo de la fuerza de la mano y las cartas visibles del crupier. Si las probabilidades están a tu favor, puedes aumentar la apuesta; si no, hacer una apuesta mínima.</p>
+                    <p data-key="bet-adjustment-details">Esta estrategia se basa en ajustar las apuestas dependiendo de la fuerza de la mano y las cartas visibles del crupier. Si las probabilidades están a tu favor, puedes aumentar la apuesta; si no, hacer una apuesta mínima.</p>
                 </div>
             </div>
             <div class="card">
-                <p id="insurance-avoid-strategy">Evitar Seguros</p>
-                <span id="insurance-avoid-description">No apuestes por el seguro cuando el crupier tenga un As visible</span>
+                <p data-key="insurance-avoid-strategy">Evitar Seguros</p>
+                <span data-key="insurance-avoid-description">No apuestes por el seguro cuando el crupier tenga un As visible</span>
                 <div class="details">
-                    <p id="insurance-avoid-details">La opción de seguro en blackjack es a menudo una trampa para el jugador, ya que las probabilidades de que el crupier tenga un blackjack real no son tan altas. Se recomienda evitar esta apuesta adicional.</p>
+                    <p data-key="insurance-avoid-details">La opción de seguro en blackjack es a menudo una trampa para el jugador, ya que las probabilidades de que el crupier tenga un blackjack real no son tan altas. Se recomienda evitar esta apuesta adicional.</p>
                 </div>
             </div>
             <div class="card">
-                <p id="double-or-nothing-strategy">Estrategia de Doble o Nada</p>
-                <span id="double-or-nothing-description">Apuesta el doble en manos fuertes</span>
+                <p data-key="double-or-nothing-strategy">Estrategia de Doble o Nada</p>
+                <span data-key="double-or-nothing-description">Apuesta el doble en manos fuertes</span>
                 <div class="details">
-                    <p id="double-or-nothing-details">Esta estrategia consiste en doblar tu apuesta cuando tienes una mano fuerte (como 10 o 11), lo que aumenta tus ganancias potenciales. Debes hacerlo solo cuando el crupier tenga una carta débil visible.</p>
+                    <p data-key="double-or-nothing-details">Esta estrategia consiste en doblar tu apuesta cuando tienes una mano fuerte (como 10 o 11), lo que aumenta tus ganancias potenciales. Debes hacerlo solo cuando el crupier tenga una carta débil visible.</p>
                 </div>
             </div>
         </div>
 
-        <h2 id="poker-title">Póker</h2>
+        <h2 data-key="poker-title">Póker</h2>
         <div class="cards">
             <div class="card">
-                <p id="tight-aggressive-strategy">Estrategia Tight-Aggressive (TAG)</p>
-                <span id="tight-aggressive-description">Juega pocas manos pero agresivamente</span>
+                <p data-key="tight-aggressive-strategy">Estrategia Tight-Aggressive (TAG)</p>
+                <span data-key="tight-aggressive-description">Juega pocas manos pero agresivamente</span>
                 <div class="details">
-                    <p id="tight-aggressive-details">La estrategia TAG se basa en ser selectivo con las manos que juegas, pero cuando decides entrar en una mano, lo haces de manera agresiva para maximizar tus ganancias.</p>
+                    <p data-key="tight-aggressive-details">La estrategia TAG se basa en ser selectivo con las manos que juegas, pero cuando decides entrar en una mano, lo haces de manera agresiva para maximizar tus ganancias.</p>
                 </div>
             </div>
             <div class="card">
-                <p id="loose-aggressive-strategy">Estrategia Loose-Aggressive (LAG)</p>
-                <span id="loose-aggressive-description">Juega muchas manos y apuesta agresivamente</span>
+                <p data-key="loose-aggressive-strategy">Estrategia Loose-Aggressive (LAG)</p>
+                <span data-key="loose-aggressive-description">Juega muchas manos y apuesta agresivamente</span>
                 <div class="details">
-                    <p id="loose-aggressive-details">La estrategia LAG se basa en jugar una mayor cantidad de manos y ser agresivo con ellas. Es ideal para jugadores que buscan mantener presión sobre sus oponentes.</p>
+                    <p data-key="loose-aggressive-details">La estrategia LAG se basa en jugar una mayor cantidad de manos y ser agresivo con ellas. Es ideal para jugadores que buscan mantener presión sobre sus oponentes.</p>
                 </div>
             </div>
             <div class="card">
-                <p id="position-strategy">Estrategia de Posición</p>
-                <span id="position-description">Aprovecha tu posición en la mesa para controlar el juego</span>
+                <p data-key="position-strategy">Estrategia de Posición</p>
+                <span data-key="position-description">Aprovecha tu posición en la mesa para controlar el juego</span>
                 <div class="details">
-                    <p id="position-details">La posición en la mesa es crucial en el póker. Ser uno de los últimos en actuar te da una ventaja estratégica, ya que puedes ver las decisiones de tus oponentes antes de hacer la tuya.</p>
+                    <p data-key="position-details">La posición en la mesa es crucial en el póker. Ser uno de los últimos en actuar te da una ventaja estratégica, ya que puedes ver las decisiones de tus oponentes antes de hacer la tuya.</p>
                 </div>
             </div>
             <div class="card">
-                <p id="bluffing-strategy">Bluffing (Faroles)</p>
-                <span id="bluffing-description">Engaña a tus oponentes para que se retiren con manos débiles</span>
+                <p data-key="bluffing-strategy">Bluffing (Faroles)</p>
+                <span data-key="bluffing-description">Engaña a tus oponentes para que se retiren con manos débiles</span>
                 <div class="details">
-                    <p id="bluffing-details">El bluffing es un componente clave del póker. Hacer que tus oponentes crean que tienes una mano fuerte cuando en realidad no la tienes puede ganar la mano sin necesidad de mostrar cartas fuertes.</p>
+                    <p data-key="bluffing-details">El bluffing es un componente clave del póker. Hacer que tus oponentes crean que tienes una mano fuerte cuando en realidad no la tienes puede ganar la mano sin necesidad de mostrar cartas fuertes.</p>
                 </div>
             </div>
             <div class="card">
-                <p id="conservative-strategy">Jugar de Manera Conservadora</p>
-                <span id="conservative-description">Evita arriesgarse demasiado y juega de forma estable</span>
+                <p data-key="conservative-strategy">Jugar de Manera Conservadora</p>
+                <span data-key="conservative-description">Evita arriesgarse demasiado y juega de forma estable</span>
                 <div class="details">
-                    <p id="conservative-details">La estrategia conservadora se basa en evitar grandes riesgos y jugar solo las manos que tienen una alta probabilidad de ganar. Esta estrategia es ideal para principiantes o jugadores que prefieren evitar grandes pérdidas.</p>
+                    <p data-key="conservative-details">La estrategia conservadora se basa en evitar grandes riesgos y jugar solo las manos que tienen una alta probabilidad de ganar. Esta estrategia es ideal para principiantes o jugadores que prefieren evitar grandes pérdidas.</p>
                 </div>
             </div>
             <div class="card">
-                <p id="pot-control-strategy">Estrategia de Control del Pot</p>
-                <span id="pot-control-description">Controla el tamaño del pozo para proteger tus ganancias</span>
+                <p data-key="pot-control-strategy">Estrategia de Control del Pot</p>
+                <span data-key="pot-control-description">Controla el tamaño del pozo para proteger tus ganancias</span>
                 <div class="details">
-                    <p id="pot-control-details">Controlar el tamaño del pozo es vital para evitar que otros jugadores te desborden. Puedes aumentar las apuestas cuando tengas una mano fuerte y limitar las pérdidas en manos débiles.</p>
+                    <p data-key="pot-control-details">Controlar el tamaño del pozo es vital para evitar que otros jugadores te desborden. Puedes aumentar las apuestas cuando tengas una mano fuerte y limitar las pérdidas en manos débiles.</p>
                 </div>
             </div>
         </div>
-
     </div>
-
+    <br>
+    <br>
+    <br>
     <div class="footer">
-        <p>&copy; 2025 <a href="TerminoCondiciones.html" id="terms-link">Términos y Condiciones</a></p>
+        <p>&copy; 2025 <a href="TerminoCondiciones.html" data-key="terms-link">Términos y Condiciones</a></p>
     </div>
 
     <script>
@@ -638,16 +640,33 @@
             }
         };
 
+        // Cargar el idioma guardado desde localStorage o usar el idioma por defecto 'es'
+        let currentLanguage = localStorage.getItem('language') || 'en';
+    
+        // Función para cambiar el idioma
         function changeLanguage(language) {
-            let selectedLanguage = translations[language];
-
-            for (const key in selectedLanguage) {
-                const element = document.getElementById(key);
-                if (element) {
-                    element.textContent = selectedLanguage[key];
-                }
-            }
+            currentLanguage = language;
+            localStorage.setItem('language', language); // Guardar el idioma seleccionado en localStorage
+            applyTranslations(language);
         }
+    
+        // Función para aplicar las traducciones
+        function applyTranslations(language) {
+            const elements = document.querySelectorAll("[data-key]");
+            elements.forEach((element) => {
+                const key = element.getAttribute("data-key");
+                if (translations[language][key]) {
+                    element.textContent = translations[language][key];
+                }
+            });
+        }
+    
+        // Aplicar el idioma cargado desde localStorage al cargar la página
+        document.addEventListener('DOMContentLoaded', () => {
+            applyTranslations(currentLanguage);
+            // Asegúrate de seleccionar el idioma en el selector (si tienes un selector para el idioma)
+            document.getElementById('language').value = currentLanguage;
+        });
     </script>
 </body>
 </html>

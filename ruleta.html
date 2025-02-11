@@ -303,7 +303,7 @@
 <body>
     <div class="header">
         <img src="https://i.imgur.com/YDar1fs.png" alt="Logo SpinStats">
-        <p data-key="appName">SpinStats</p>
+        <p data-key="spinstats">SpinStats</p>
         <nav class="nav">
             <a href="index.html" data-key="home">Inicio</a>
             <a href="ruleta.html" data-key="roulette">Ruleta</a>
@@ -389,265 +389,256 @@
         &copy; 2025 <a href="TerminoCondiciones.html" data-key="terms">Términos y Condiciones</a>
     </div>
     
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-    // Traducciones
-    const translations = {
-        es: {
-            appName: "SpinStats",
-            home: "Inicio",
-            roulette: "Ruleta",
-            blackjack: "Blackjack",
-            poker: "Poker",
-            slots: "Slots",
-            sports: "A. Deportivas",
-            strategies: "Estrategias",
-            rouletteTitle: "Ruleta",
-            rouletteType: "Tipo de Ruleta:",
-            europeanRoulette: "Europea (37 casillas)",
-            americanRoulette: "Americana (38 casillas)",
-            betNumbers: "Apostar a números específicos:",
-            chooseNumbers: "Elige los números (separados por comas):",
-            betColor: "Apostar a color:",
-            red: "Rojo",
-            black: "Negro",
-            betEvenOdd: "Apostar a par/impar:",
-            betRow: "Apostar a fila:",
-            row1: "Fila 1 (1-12)",
-            row2: "Fila 2 (13-24)",
-            row3: "Fila 3 (25-36)",
-            betDozen: "Apostar a docena:",
-            dozen1: "Docena 1 (1-12)",
-            dozen2: "Docena 2 (13-24)",
-            dozen3: "Docena 3 (25-36)",
-            betAmount: "Cantidad a apostar (€):",
-            calculateButton: "Calcular Probabilidades y Ganancias",
-            terms: "Términos y Condiciones",
-            invalidBetAmount: "Por favor, introduce una cantidad válida para apostar.",
-            invalidNumbers: "Por favor, introduce números válidos entre 0 y 36, separados por comas.",
-            probabilityWinNumbers: "Probabilidad de ganar a alguno de los números elegidos: ",
-            probabilityLoseNumbers: "Probabilidad de perder con esos números: ",
-            expectedValueNumbers: "Esperanza matemática a esos números: €",
-            probabilityWinColor: "Probabilidad de ganar a color (rojo o negro): ",
-            expectedValueColor: "Esperanza matemática a color: €",
-            probabilityWinEvenOdd: "Probabilidad de ganar a par/impar: ",
-            expectedValueEvenOdd: "Esperanza matemática a par/impar: €",
-            probabilityWinRow: "Probabilidad de ganar a fila: ",
-            expectedValueRow: "Esperanza matemática a fila: €",
-            probabilityWinDozen: "Probabilidad de ganar a docena: ",
-            expectedValueDozen: "Esperanza matemática a docena: €",
-            totalWinProbability: "Probabilidad total de ganar: ",
-            maxWin: "Ganancia máxima posible: €",
-            probableWin: "Ganancia probable: €"
-        },
-        en: {
-            appName: "SpinStats",
-            home: "Home",
-            roulette: "Roulette",
-            blackjack: "Blackjack",
-            poker: "Poker",
-            slots: "Slots",
-            sports: "Sports",
-            strategies: "Strategies",
-            rouletteTitle: "Roulette",
-            rouletteType: "Roulette Type:",
-            europeanRoulette: "European (37 slots)",
-            americanRoulette: "American (38 slots)",
-            betNumbers: "Bet on specific numbers:",
-            chooseNumbers: "Choose numbers (separated by commas):",
-            betColor: "Bet on color:",
-            red: "Red",
-            black: "Black",
-            betEvenOdd: "Bet on even/odd:",
-            betRow: "Bet on row:",
-            row1: "Row 1 (1-12)",
-            row2: "Row 2 (13-24)",
-            row3: "Row 3 (25-36)",
-            betDozen: "Bet on dozen:",
-            dozen1: "Dozen 1 (1-12)",
-            dozen2: "Dozen 2 (13-24)",
-            dozen3: "Dozen 3 (25-36)",
-            betAmount: "Amount to bet (€):",
-            calculateButton: "Calculate Probabilities and Winnings",
-            terms: "Terms and Conditions",
-            invalidBetAmount: "Please enter a valid bet amount.",
-            invalidNumbers: "Please enter valid numbers between 0 and 36, separated by commas.",
-            probabilityWinNumbers: "Probability of winning on chosen numbers: ",
-            probabilityLoseNumbers: "Probability of losing with those numbers: ",
-            expectedValueNumbers: "Expected value on those numbers: €",
-            probabilityWinColor: "Probability of winning on color (red or black): ",
-            expectedValueColor: "Expected value on color: €",
-            probabilityWinEvenOdd: "Probability of winning on even/odd: ",
-            expectedValueEvenOdd: "Expected value on even/odd: €",
-            probabilityWinRow: "Probability of winning on row: ",
-            expectedValueRow: "Expected value on row: €",
-            probabilityWinDozen: "Probability of winning on dozen: ",
-            expectedValueDozen: "Expected value on dozen: €",
-            totalWinProbability: "Total probability of winning: ",
-            maxWin: "Maximum possible winnings: €",
-            probableWin: "Probable winnings: €"
-        }
-    };
 
-    // Función para cambiar el idioma
-    function changeLanguage(language) {
-        const elements = document.querySelectorAll('[data-key]');
-        elements.forEach(element => {
-            const key = element.getAttribute('data-key');
-            if (translations[language] && translations[language][key]) {
-                element.textContent = translations[language][key];
-            }
+    <script>
+        const translations = {
+    "es": {
+        "spinstats": "SpinStats",
+        "chooseNumbers": "Elige los números (separados por comas):",
+        "betColor": "Selecciona color:",
+        "red": "Rojo",
+        "black": "Negro",
+        "betRow": "Selecciona fila:",
+        "row1": "Fila 1 (1-12)",
+        "row2": "Fila 2 (13-24)",
+        "row3": "Fila 3 (25-36)",
+        "betDozen": "Selecciona docena:",
+        "dozen1": "Docena 1 (1-12)",
+        "dozen2": "Docena 2 (13-24)",
+        "dozen3": "Docena 3 (25-36)",
+        "betAmount": "Cantidad a apostar (€):",
+        "calculateButton": "Calcular Probabilidades y Ganancias",
+        "terms": "Términos y Condiciones",
+        "rouletteType": "Tipo de Ruleta",
+        "europeanRoulette": "Europea (37 casillas)",
+        "americanRoulette": "Americana (38 casillas)",
+        "rouletteTitle": "Ruleta",
+        "home": "Inicio",
+        "roulette": "Ruleta",
+        "blackjack": "Blackjack",
+        "poker": "Poker",
+        "slots": "Slots",
+        "sports": "A. Deportivas",
+        "strategies": "Estrategias",
+        "invalidBetAmount": "Cantidad de apuesta inválida.",
+        "invalidNumbers": "Los números ingresados no son válidos.",
+        "probabilityWinNumbers": "Probabilidad de ganar con los números seleccionados: ",
+        "probabilityLoseNumbers": "Probabilidad de perder con los números seleccionados: ",
+        "expectedValueNumbers": "Valor esperado de la apuesta en números: ",
+        "probabilityWinColor": "Probabilidad de ganar con el color seleccionado: ",
+        "expectedValueColor": "Valor esperado de la apuesta en color: ",
+        "probabilityWinEvenOdd": "Probabilidad de ganar con par/impar: ",
+        "expectedValueEvenOdd": "Valor esperado de la apuesta en par/impar: ",
+        "probabilityWinRow": "Probabilidad de ganar con la fila seleccionada: ",
+        "expectedValueRow": "Valor esperado de la apuesta en fila: ",
+        "probabilityWinDozen": "Probabilidad de ganar con la docena seleccionada: ",
+        "expectedValueDozen": "Valor esperado de la apuesta en docena: ",
+        "totalWinProbability": "Probabilidad total de ganar: ",
+        "maxWin": "Ganancia máxima posible: ",
+        "probableWin": "Ganancia probable: "
+    },
+    "en": {
+        "spinstats": "SpinStats",
+        "chooseNumbers": "Choose numbers (separated by commas):",
+        "betColor": "Select color:",
+        "red": "Red",
+        "black": "Black",
+        "betRow": "Select row:",
+        "row1": "Row 1 (1-12)",
+        "row2": "Row 2 (13-24)",
+        "row3": "Row 3 (25-36)",
+        "betDozen": "Select dozen:",
+        "dozen1": "Dozen 1 (1-12)",
+        "dozen2": "Dozen 2 (13-24)",
+        "dozen3": "Dozen 3 (25-36)",
+        "betAmount": "Bet Amount (€):",
+        "calculateButton": "Calculate Probabilities and Winnings",
+        "terms": "Terms and Conditions",
+        "rouletteType": "Roulette Type",
+        "europeanRoulette": "European (37 slots)",
+        "americanRoulette": "American (38 slots)",
+        "rouletteTitle": "Roulette",
+        "home": "Home",
+        "roulette": "Roulette",
+        "blackjack": "Blackjack",
+        "poker": "Poker",
+        "slots": "Slots",
+        "sports": "Sports",
+        "strategies": "Strategies",
+        "invalidBetAmount": "Invalid bet amount.",
+        "invalidNumbers": "The numbers entered are invalid.",
+        "probabilityWinNumbers": "Probability of winning with selected numbers: ",
+        "probabilityLoseNumbers": "Probability of losing with selected numbers: ",
+        "expectedValueNumbers": "Expected value of bet on numbers: ",
+        "probabilityWinColor": "Probability of winning with selected color: ",
+        "expectedValueColor": "Expected value of bet on color: ",
+        "probabilityWinEvenOdd": "Probability of winning with even/odd: ",
+        "expectedValueEvenOdd": "Expected value of bet on even/odd: ",
+        "probabilityWinRow": "Probability of winning with selected row: ",
+        "expectedValueRow": "Expected value of bet on row: ",
+        "probabilityWinDozen": "Probability of winning with selected dozen: ",
+        "expectedValueDozen": "Expected value of bet on dozen: ",
+        "totalWinProbability": "Total probability of winning: ",
+        "maxWin": "Maximum possible win: ",
+        "probableWin": "Probable win: "
+    }
+};
+
+        let currentLanguage = localStorage.getItem('language') || 'en';
+        document.addEventListener('DOMContentLoaded', () => {
+            applyTranslations(currentLanguage);
+            document.getElementById('language').value = currentLanguage;  // Asegura que el idioma se mantenga seleccionado
         });
+
+        function applyTranslations(language) {
+            const elements = document.querySelectorAll('[data-key]');
+            elements.forEach((el) => {
+                const key = el.getAttribute('data-key');
+                if (translations[language] && translations[language][key]) {
+                    el.innerText = translations[language][key];
+                }
+            });
+        }
+
+        function changeLanguage(language) {
+            localStorage.setItem('language', language);
+            applyTranslations(language);
+        }
+
+
+      // Mostrar opciones de apuestas
+document.getElementById("apostarNumeros").addEventListener('change', function () {
+    document.getElementById("numerosOpciones").style.display = this.checked ? 'block' : 'none';
+});
+document.getElementById("apostarColor").addEventListener('change', function () {
+    document.getElementById("colorApostado").style.display = this.checked ? 'block' : 'none';
+});
+document.getElementById("apostarFila").addEventListener('change', function () {
+    document.getElementById("filaApostada").style.display = this.checked ? 'block' : 'none';
+});
+document.getElementById("apostarDocena").addEventListener('change', function () {
+    document.getElementById("docenaApostada").style.display = this.checked ? 'block' : 'none';
+});
+
+// Función para calcular probabilidades
+function calcularProbabilidades() {
+    const cantidadApuesta = parseFloat(document.getElementById("cantidadApuesta").value);
+    if (isNaN(cantidadApuesta) || cantidadApuesta <= 0) {
+        alert(translations[document.getElementById("language").value].invalidBetAmount);
+        return;
     }
 
-    // Cambiar el idioma por defecto al cargar
-    changeLanguage('es'); // Puedes poner 'en' para inglés por defecto si quieres
+    let resultadoHTML = "";
+    let probabilidadTotalPerder = 1;
+    let gananciaMaxima = 0;
+    let gananciaProbable = 0;
 
-    // Detectar el cambio de idioma desde el selector
-    document.getElementById('language').addEventListener('change', function() {
-        changeLanguage(this.value);
-    });
-
-    
-        // Mostrar opciones de apuestas
-        document.getElementById('language').addEventListener('change', function() {
-        changeLanguage(this.value);
-    });
-
-    // Mostrar opciones de apuestas
-    document.getElementById("apostarNumeros").addEventListener('change', function () {
-        document.getElementById("numerosOpciones").style.display = this.checked ? 'block' : 'none';
-    });
-    document.getElementById("apostarColor").addEventListener('change', function () {
-        document.getElementById("colorApostado").style.display = this.checked ? 'block' : 'none';
-    });
-    document.getElementById("apostarFila").addEventListener('change', function () {
-        document.getElementById("filaApostada").style.display = this.checked ? 'block' : 'none';
-    });
-    document.getElementById("apostarDocena").addEventListener('change', function () {
-        document.getElementById("docenaApostada").style.display = this.checked ? 'block' : 'none';
-    });
-    
-         // Función para calcular probabilidades
-    function calcularProbabilidades() {
-        const cantidadApuesta = parseFloat(document.getElementById("cantidadApuesta").value);
-        if (isNaN(cantidadApuesta) || cantidadApuesta <= 0) {
-            alert(translations[document.getElementById("language").value].invalidBetAmount);
-            return;
-        }
-
-        let resultadoHTML = "";
-        let probabilidadTotalPerder = 1;
-        let gananciaMaxima = 0;
-        let gananciaProbable = 0;
-
-        // Números
-        if (document.getElementById("apostarNumeros").checked) {
-            const numerosElegidos = document.getElementById("numerosElegidos").value.split(',').map(n => {
-                const num = parseInt(n.trim());
-                if (isNaN(num) || num < 0 || num > 36) {
-                    alert(translations[document.getElementById("language").value].invalidNumbers);
-                    throw new Error("Entrada inválida en números específicos.");
-                }
-                return num;
-            });
-
-            const cantidadNumeros = numerosElegidos.length;
-            if (cantidadNumeros > 0) {
-                const probabilidadNumeros = (cantidadNumeros / 37);
-                const probabilidadPerderNumeros = 1 - probabilidadNumeros;
-                const gananciaNumeros = cantidadApuesta * 35;
-                const esperanzaNumeros = (probabilidadNumeros * gananciaNumeros) - (probabilidadPerderNumeros * cantidadApuesta);
-
-                resultadoHTML += `
-                    <p>${translations[document.getElementById("language").value].probabilityWinNumbers} ${(probabilidadNumeros * 100).toFixed(2)}%</p>
-                    <p>${translations[document.getElementById("language").value].probabilityLoseNumbers} ${(probabilidadPerderNumeros * 100).toFixed(2)}%</p>
-                    <p>${translations[document.getElementById("language").value].expectedValueNumbers} €${esperanzaNumeros.toFixed(2)}</p>
-                `;
-                probabilidadTotalPerder *= probabilidadPerderNumeros;
-                gananciaMaxima = Math.max(gananciaMaxima, gananciaNumeros);
-                gananciaProbable += esperanzaNumeros;
+    // Números
+    if (document.getElementById("apostarNumeros").checked) {
+        const numerosElegidos = document.getElementById("numerosElegidos").value.split(',').map(n => {
+            const num = parseInt(n.trim());
+            if (isNaN(num) || num < 0 || num > 36) {
+                alert(translations[document.getElementById("language").value].invalidNumbers);
+                throw new Error("Entrada inválida en números específicos.");
             }
-        }
+            return num;
+        });
 
-        // Color
-        if (document.getElementById("apostarColor").checked) {
-            const probabilidadColor = 18 / 37;
-            const probabilidadPerderColor = 1 - probabilidadColor;
-            const gananciaColor = cantidadApuesta * 2;
-            const esperanzaColor = (probabilidadColor * gananciaColor) - (probabilidadPerderColor * cantidadApuesta);
-
-            resultadoHTML += `
-                <p>${translations[document.getElementById("language").value].probabilityWinColor} ${(probabilidadColor * 100).toFixed(2)}%</p>
-                <p>${translations[document.getElementById("language").value].expectedValueColor} €${esperanzaColor.toFixed(2)}</p>
-            `;
-            probabilidadTotalPerder *= probabilidadPerderColor;
-            gananciaMaxima = Math.max(gananciaMaxima, gananciaColor);
-            gananciaProbable += esperanzaColor;
-        }
-
-        // Par/Impar
-        if (document.getElementById("apostarParImpar").checked) {
-            const probabilidadEvenOdd = 18 / 37;
-            const probabilidadPerderEvenOdd = 1 - probabilidadEvenOdd;
-            const gananciaEvenOdd = cantidadApuesta * 2;
-            const esperanzaEvenOdd = (probabilidadEvenOdd * gananciaEvenOdd) - (probabilidadPerderEvenOdd * cantidadApuesta);
+        const cantidadNumeros = numerosElegidos.length;
+        if (cantidadNumeros > 0) {
+            const probabilidadNumeros = (cantidadNumeros / 37);
+            const probabilidadPerderNumeros = 1 - probabilidadNumeros;
+            const gananciaNumeros = cantidadApuesta * 35;
+            const esperanzaNumeros = (probabilidadNumeros * gananciaNumeros) - (probabilidadPerderNumeros * cantidadApuesta);
 
             resultadoHTML += `
-                <p>${translations[document.getElementById("language").value].probabilityWinEvenOdd} ${(probabilidadEvenOdd * 100).toFixed(2)}%</p>
-                <p>${translations[document.getElementById("language").value].expectedValueEvenOdd} €${esperanzaEvenOdd.toFixed(2)}</p>
+                <p>${translations[document.getElementById("language").value].probabilityWinNumbers} ${(probabilidadNumeros * 100).toFixed(2)}%</p>
+                <p>${translations[document.getElementById("language").value].probabilityLoseNumbers} ${(probabilidadPerderNumeros * 100).toFixed(2)}%</p>
+                <p>${translations[document.getElementById("language").value].expectedValueNumbers} €${esperanzaNumeros.toFixed(2)}</p>
             `;
-            probabilidadTotalPerder *= probabilidadPerderEvenOdd;
-            gananciaMaxima = Math.max(gananciaMaxima, gananciaEvenOdd);
-            gananciaProbable += esperanzaEvenOdd;
+            probabilidadTotalPerder *= probabilidadPerderNumeros;
+            gananciaMaxima = Math.max(gananciaMaxima, gananciaNumeros);
+            gananciaProbable += esperanzaNumeros;
         }
+    }
 
-        // Fila
-        if (document.getElementById("apostarFila").checked) {
-            const probabilidadFila = 12 / 37;
-            const probabilidadPerderFila = 1 - probabilidadFila;
-            const gananciaFila = cantidadApuesta * 3;
-            const esperanzaFila = (probabilidadFila * gananciaFila) - (probabilidadPerderFila * cantidadApuesta);
-
-            resultadoHTML += `
-                <p>${translations[document.getElementById("language").value].probabilityWinRow} ${(probabilidadFila * 100).toFixed(2)}%</p>
-                <p>${translations[document.getElementById("language").value].expectedValueRow} €${esperanzaFila.toFixed(2)}</p>
-            `;
-            probabilidadTotalPerder *= probabilidadPerderFila;
-            gananciaMaxima = Math.max(gananciaMaxima, gananciaFila);
-            gananciaProbable += esperanzaFila;
-        }
-
-        // Docena
-        if (document.getElementById("apostarDocena").checked) {
-            const probabilidadDocena = 12 / 37;
-            const probabilidadPerderDocena = 1 - probabilidadDocena;
-            const gananciaDocena = cantidadApuesta * 3;
-            const esperanzaDocena = (probabilidadDocena * gananciaDocena) - (probabilidadPerderDocena * cantidadApuesta);
-
-            resultadoHTML += `
-                <p>${translations[document.getElementById("language").value].probabilityWinDozen} ${(probabilidadDocena * 100).toFixed(2)}%</p>
-                <p>${translations[document.getElementById("language").value].expectedValueDozen} €${esperanzaDocena.toFixed(2)}</p>
-            `;
-            probabilidadTotalPerder *= probabilidadPerderDocena;
-            gananciaMaxima = Math.max(gananciaMaxima, gananciaDocena);
-            gananciaProbable += esperanzaDocena;
-        }
-
-        // Total
-        const probabilidadTotal = 1 - probabilidadTotalPerder;
+    // Color
+    if (document.getElementById("apostarColor").checked) {
+        const probabilidadColor = 18 / 37;
+        const probabilidadPerderColor = 1 - probabilidadColor;
+        const gananciaColor = cantidadApuesta * 2;
+        const esperanzaColor = (probabilidadColor * gananciaColor) - (probabilidadPerderColor * cantidadApuesta);
 
         resultadoHTML += `
-            <p>${translations[document.getElementById("language").value].totalWinProbability} ${(probabilidadTotal * 100).toFixed(2)}%</p>
-            <p>${translations[document.getElementById("language").value].maxWin} €${gananciaMaxima.toFixed(2)}</p>
-            <p>${translations[document.getElementById("language").value].probableWin} €${gananciaProbable.toFixed(2)}</p>
+            <p>${translations[document.getElementById("language").value].probabilityWinColor} ${(probabilidadColor * 100).toFixed(2)}%</p>
+            <p>${translations[document.getElementById("language").value].expectedValueColor} €${esperanzaColor.toFixed(2)}</p>
         `;
-
-        document.getElementById("resultado").innerHTML = resultadoHTML;
+        probabilidadTotalPerder *= probabilidadPerderColor;
+        gananciaMaxima = Math.max(gananciaMaxima, gananciaColor);
+        gananciaProbable += esperanzaColor;
     }
 
-    document.querySelector("button").addEventListener("click", calcularProbabilidades);
-});
+    // Par/Impar
+    if (document.getElementById("apostarParImpar").checked) {
+        const probabilidadEvenOdd = 18 / 37;
+        const probabilidadPerderEvenOdd = 1 - probabilidadEvenOdd;
+        const gananciaEvenOdd = cantidadApuesta * 2;
+        const esperanzaEvenOdd = (probabilidadEvenOdd * gananciaEvenOdd) - (probabilidadPerderEvenOdd * cantidadApuesta);
+
+        resultadoHTML += `
+            <p>${translations[document.getElementById("language").value].probabilityWinEvenOdd} ${(probabilidadEvenOdd * 100).toFixed(2)}%</p>
+            <p>${translations[document.getElementById("language").value].expectedValueEvenOdd} €${esperanzaEvenOdd.toFixed(2)}</p>
+        `;
+        probabilidadTotalPerder *= probabilidadPerderEvenOdd;
+        gananciaMaxima = Math.max(gananciaMaxima, gananciaEvenOdd);
+        gananciaProbable += esperanzaEvenOdd;
+    }
+
+    // Fila
+    if (document.getElementById("apostarFila").checked) {
+        const probabilidadFila = 12 / 37;
+        const probabilidadPerderFila = 1 - probabilidadFila;
+        const gananciaFila = cantidadApuesta * 3;
+        const esperanzaFila = (probabilidadFila * gananciaFila) - (probabilidadPerderFila * cantidadApuesta);
+
+        resultadoHTML += `
+            <p>${translations[document.getElementById("language").value].probabilityWinRow} ${(probabilidadFila * 100).toFixed(2)}%</p>
+            <p>${translations[document.getElementById("language").value].expectedValueRow} €${esperanzaFila.toFixed(2)}</p>
+        `;
+        probabilidadTotalPerder *= probabilidadPerderFila;
+        gananciaMaxima = Math.max(gananciaMaxima, gananciaFila);
+        gananciaProbable += esperanzaFila;
+    }
+
+    // Docena
+    if (document.getElementById("apostarDocena").checked) {
+        const probabilidadDocena = 12 / 37;
+        const probabilidadPerderDocena = 1 - probabilidadDocena;
+        const gananciaDocena = cantidadApuesta * 3;
+        const esperanzaDocena = (probabilidadDocena * gananciaDocena) - (probabilidadPerderDocena * cantidadApuesta);
+
+        resultadoHTML += `
+            <p>${translations[document.getElementById("language").value].probabilityWinDozen} ${(probabilidadDocena * 100).toFixed(2)}%</p>
+            <p>${translations[document.getElementById("language").value].expectedValueDozen} €${esperanzaDocena.toFixed(2)}</p>
+        `;
+        probabilidadTotalPerder *= probabilidadPerderDocena;
+        gananciaMaxima = Math.max(gananciaMaxima, gananciaDocena);
+        gananciaProbable += esperanzaDocena;
+    }
+
+    // Total
+    const probabilidadTotal = 1 - probabilidadTotalPerder;
+
+    resultadoHTML += `
+        <p>${translations[document.getElementById("language").value].totalWinProbability} ${(probabilidadTotal * 100).toFixed(2)}%</p>
+        <p>${translations[document.getElementById("language").value].maxWin} €${gananciaMaxima.toFixed(2)}</p>
+        <p>${translations[document.getElementById("language").value].probableWin} €${gananciaProbable.toFixed(2)}</p>
+    `;
+
+    document.getElementById("resultado").innerHTML = resultadoHTML;
+}
+
+document.querySelector("button").addEventListener("click", calcularProbabilidades);  // Esta línea estaba fuera de contexto y causaba un error.
     </script>
     
       
