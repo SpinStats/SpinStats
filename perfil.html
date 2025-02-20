@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpinStats</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://i.imgur.com/YDar1fs.png" type="image/png">
+    <script type="module" src="register.js" defer></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom, #1e1e2f, #0c0c12);
+            margin: 0;
+            padding: 0;
+            color: white;
+        }
+
+        .header {
+            background-color: #111;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            flex-wrap: wrap;
+        }
+
+        .header img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            margin-right: 15px;
+        }
+
+        .header p {
+            font-size: 1.5em;
+            color: #28a745;
+            margin: 0;
+        }
+
+        .nav {
+            display: flex;
+            gap: 15px;
+            margin-left: auto;
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: #28a745;
+        }
+
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .language-selector {
+            background-color: #333;
+            color: white;
+            border: 1px solid #28a745;
+            padding: 8px;
+            font-size: 1em;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .language-selector:hover {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: rgba(0, 0, 0, 0.8); /* Hacer la card más oscura */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            height: auto; /* Ajuste para que la card se adapte al contenido */
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            color: white;
+            font-size: 1.2em;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            opacity: 1;
+            padding: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5), 0 0 40px rgba(40, 167, 69, 0.7);
+        }
+
+        .card img {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+
+        .card input, .card button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+            font-size: 1em;
+        }
+
+        .card input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+            font-size: 1em;
+            box-sizing: border-box; /* Asegura que el padding y border se incluyan en el tamaño total */
+            background-color: #333;
+            color: white;
+            border: 1px solid #28a745;
+        }
+
+        .card input:focus {
+            outline: none;
+            border-color: #28a745;
+        }
+
+        .card button {
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .card button:hover {
+            background-color: #218838;
+        }
+
+        .card .google-btn {
+            background-color: #db4437;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 50px;
+        }
+
+        .card .google-btn img {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+
+        .footer {
+            background: #111;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 150px;
+            border-top: 2px solid #222;
+        }
+
+        .footer a {
+            color: #28a745;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Ajustes responsivos */
+        @media (max-width: 768px) {
+            .header {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding: 20px 0;
+            }
+
+            .header img {
+                position: absolute;
+                top: 15px;
+                left: 20px;
+                width: 50px;
+                height: 50px;
+            }
+
+            .header p {
+                font-size: 1.5em;
+                color: #28a745;
+                margin: 0;
+                text-align: center;
+            }
+
+            .nav {
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+                margin-top: 15px;
+                width: 100%;
+            }
+
+            .nav a {
+                font-size: 0.9em;
+            }
+
+            .card-container {
+                margin-top: 20px;
+            }
+
+            .card {
+                height: auto;
+                padding: 15px;
+                width: 250px;
+            }
+
+            .card img {
+                width: 100px;
+                height: 100px;
+            }
+
+            .footer {
+                font-size: 0.8em;
+            }
+
+            .language-selector {
+                font-size: 0.8em;
+                padding: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="https://i.imgur.com/YDar1fs.png" alt="Logo SpinStats">
+        <p id="header-text" data-key="spinstats">SpinStats</p>
+        <nav class="nav">
+            <a href="index.html" id="home-link" data-key="home">Inicio</a>
+            <a href="ruleta.html" id="roulette-link" data-key="roulette">Ruleta</a>
+            <a href="blackjack.html" id="blackjack-link" data-key="blackjack">Blackjack</a>
+            <a href="poker.html" id="poker-link" data-key="poker">Poker</a>
+            <a href="slots.html" id="slots-link" data-key="slots">Slots</a>
+            <a href="apuestas.html" id="sports-betting-link" data-key="sports">A. Deportivas</a>
+            <a href="estrategias.html" id="strategies-link" data-key="strategies">Estrategias</a>
+            <a href="perfil.html" id="profile-link">Perfil</a>
+        </nav>
+    </div>
+
+    <select id="language" class="language-selector" onchange="changeLanguage(this.value)">
+        <option value="es">Español</option>
+        <option value="en">English</option>
+    </select>
+
+    <div class="main-container">
+        <!-- Card con formulario de registro -->
+        <div class="card-container">
+            <div class="card">
+                <h3 id="register-title" data-key="register-title">Regístrate</h3>
+                <form id="register-form">
+                    <input type="text" id="username" placeholder="Nombre de usuario" data-key="username" required>
+                    <input type="email" id="email" placeholder="Correo electrónico" data-key="email" required>
+                    <input type="password" id="password" placeholder="Contraseña" data-key="password" required>
+                    <button type="submit" id="submit" data-key="submit">Registrarse</button>
+                </form>                
+                <button class="google-btn">
+                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" />
+                    <span id="google-signin" data-key="google-signin">Iniciar sesión con Google</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 SpinStats. Todos los derechos reservados.</p>
+    </div>
+
+</body>
+
+</html>
