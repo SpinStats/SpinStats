@@ -371,6 +371,15 @@
     </div>
 
     <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sessionStarted = sessionStorage.getItem('sessionStarted');
+
+        if (!sessionStarted) {
+            alert('LogIn to continue');
+            sessionStorage.setItem('sessionStarted', 'true'); // Evita que el aviso salga más de una vez
+            window.location.href = 'perfil.html';
+        }
+    });
         // Traducir textos automáticamente al cargar la página
         document.addEventListener('DOMContentLoaded', function() {
             const savedLanguage = localStorage.getItem('language') || 'en'; // Si no hay idioma guardado, por defecto 'en'
