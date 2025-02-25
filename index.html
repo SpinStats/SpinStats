@@ -350,7 +350,7 @@
                 </a>
             </div>
             <div class="card" data-card="sports">
-                <a href="adeportivas.html">
+                <a href="apuestas.html">
                     <img src="https://i.imgur.com/A3amnU6.png" alt="Icono Tarjeta 3">
                     <p data-key="sports">Apuestas Deportivas</p>
                     <span data-key="sports-description">Conoce las mejores apuestas deportivas</span>
@@ -375,9 +375,11 @@
         const sessionStarted = sessionStorage.getItem('sessionStarted');
 
         if (!sessionStarted) {
-            alert('LogIn to continue');
-            sessionStorage.setItem('sessionStarted', 'true'); // Evita que el aviso salga más de una vez
-            window.location.href = 'perfil.html';
+            setTimeout(() => {
+                alert('LogIn to continue');
+                sessionStorage.setItem('sessionStarted', 'true'); // Evita que el aviso salga más de una vez
+                window.location.href = 'perfil.html';
+            }, 1200); // Espera 2 segundos antes de mostrar el aviso
         }
     });
         // Traducir textos automáticamente al cargar la página
