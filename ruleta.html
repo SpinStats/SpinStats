@@ -427,6 +427,8 @@
         "strategies": "Estrategias",
         "invalidBetAmount": "Cantidad de apuesta inválida.",
         "invalidNumbers": "Los números ingresados no son válidos.",
+        "betNumbers": "Apostar a números específicos:",
+        "betEvenOdd": "Apostar a par/impar:",
         "probabilityWinNumbers": "Probabilidad de ganar con los números seleccionados: ",
         "probabilityLoseNumbers": "Probabilidad de perder con los números seleccionados: ",
         "expectedValueNumbers": "Valor esperado de la apuesta en números: ",
@@ -472,6 +474,8 @@
         "strategies": "Strategies",
         "invalidBetAmount": "Invalid bet amount.",
         "invalidNumbers": "The numbers entered are invalid.",
+        "betNumbers": "Bet on specific numbers:",
+        "betEvenOdd": "Bet on even/odd:",
         "probabilityWinNumbers": "Probability of winning with selected numbers: ",
         "probabilityLoseNumbers": "Probability of losing with selected numbers: ",
         "expectedValueNumbers": "Expected value of bet on numbers: ",
@@ -635,7 +639,7 @@ function calcularProbabilidades() {
     const probabilidadTotal = 1 - probabilidadTotalPerder;
 
     resultadoHTML += `
-        <p>${translations[document.getElementById("language").value].totalWinProbability} ${(probabilidadTotal * 100).toFixed(2)}%</p>
+        <p style="color: white;">${translations[document.getElementById("language").value].totalWinProbability} ${(probabilidadTotal * 100).toFixed(2)}%</p>
         <p>${translations[document.getElementById("language").value].maxWin} €${gananciaMaxima.toFixed(2)}</p>
         <p>${translations[document.getElementById("language").value].probableWin} €${gananciaProbable.toFixed(2)}</p>
     `;
