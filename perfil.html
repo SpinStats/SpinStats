@@ -156,6 +156,14 @@
         .card button:hover {
             background-color: #218838;
         }
+        .card button, .google-btn {
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 1em;
+    text-decoration: none; /* Para que se parezca más a los enlaces */
+    color: white; /* Coincide con los enlaces del nav */
+}
+
 
         .google-btn {
     display: flex;
@@ -167,6 +175,7 @@
     border-radius: 5px;
     padding: 12px 15px;
     width: 100%;
+    height: 50px;
     cursor: pointer;
     font-size: 1em;
     font-weight: bold;
@@ -266,6 +275,10 @@
                 font-size: 0.8em;
                 padding: 5px;
             }
+            .google-btn img{
+height: 85%;
+margin-right: 2px;
+}
         }
     </style>
 </head>
@@ -294,13 +307,20 @@
         <!-- Card con formulario de registro -->
         <div class="card-container">
             <div class="card">
-                <h3 id="register-title" data-key="register-title">Regístrate</h3>           
+                <h3 id="register-title" data-key="register-title">Regístrate</h3>
+                
+                <!-- Formulario de registro normal -->
+                <input type="text" id="username" placeholder="Nombre de usuario" data-key="username">
+                <input type="email" id="email" placeholder="Correo electrónico" data-key="email">
+                <input type="password" id="password" placeholder="Contraseña" data-key="password">
+                <button id="register-btn" data-key="submit">Registrarse</button>
                 <button class="google-btn" id="google-btn">
                     <img src="https://i.imgur.com/focDu03.png" alt="Google Logo">
                     <span id="google-signin" data-key="google-signin">Iniciar sesión con Google</span>
                 </button>                              
             </div>
         </div>
+        
     </div>
     <br>
     <br>
