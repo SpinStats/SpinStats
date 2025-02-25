@@ -398,6 +398,43 @@ document.addEventListener('DOMContentLoaded', () => {
     applyTranslations(currentLanguage);
     document.getElementById('language').value = currentLanguage;
 });
+document.addEventListener("DOMContentLoaded", () => {
+        applyTranslations(currentLanguage);
+        document.getElementById("language").value = currentLanguage;
+        
+        const savedUser = JSON.parse(localStorage.getItem("user"));
+        if (savedUser) {
+            showUserProfile(savedUser.username, savedUser.email);
+        }
+    });
+
+    document.getElementById("register-btn").addEventListener("click", () => {
+        const username = document.getElementById("username").value;
+        const email = document.getElementById("email").value;
+        
+        if (username && email) {
+            const user = { username, email };
+            localStorage.setItem("user", JSON.stringify(user));
+            showUserProfile(username, email);
+        }
+    });
+
+    function showUserProfile(username, email) {
+        const cardContainer = document.querySelector(".card-container");
+        cardContainer.innerHTML = `
+            <div class="card">
+                <h3>Perfil</h3>
+                <p><strong>Usuario:</strong> ${username}</p>
+                <p><strong>Correo:</strong> ${email}</p>
+                <button onclick="logout()">Cerrar sesión</button>
+            </div>
+        `;
+    }
+
+    function logout() {
+        localStorage.removeItem("user");
+        location.reload();
+    }
 </script>
 
 </html>
